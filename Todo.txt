@@ -1,0 +1,28 @@
+
+
+# Package idee:
+#         functie (naam dataset, variabele 1 tot 3 (maar mag ook columnnumber zijn)
+#                  vereist dataframe.
+#                  controleert assumptie van optellen tot 1, of optellen in alle regels identiek.
+#                  check of kolommen van number type zijn, zoniet verander dan naar number, als niet lukt error.
+#                  geeft foutmelding die uitlegt wat fout is (informatief)
+#
+#                  pakt de drie variabelen, rekent rijgetallen uit, rekent kansen uit voor elke groep.
+#                  creert vertices.
+#                  geeft dataframe terug met x,ycoordinaten per regel. (optie complete dataset plus punten, of alleen punten, als optie in normaal en als aparte functies)
+#                  ?wat doen we met de vertices?
+#                  of twee stappen (functies), eerste create vertices, (gaat ook met zelfde dataframe)
+#                  vertices plot, vertices ggplot2
+#                  dan transformatie van punten.
+#                  evt 3d plot waarin je vlak ziet ?
+#
+#                  basis van package moet zo kaal mogelijk zijn en base r. en dat is vrij makkelijk te doen.
+#                  Documentatie :
+#                          eerste heel simpel hoe gebruik je het.
+#                  dan meer uitleg
+#                  vervolgens verwijzing naar vignette
+#                  vignette legt achtergrond uit en geeft voorbeelden?
+Change Vignette
+Change Readme
+Create tests using test_heiserplot.R in R/
+delete R/test_heiserplot.R
