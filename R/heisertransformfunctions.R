@@ -11,13 +11,15 @@
 #  CreateVertices creates a separate dataframe for the vertices
 #CreateVertices, a function to create vertices.
 #
-#' Transforms categorical probabilities into vertices with x.y coordinates.
+
+
+
+#' CreateVertices Transforms categorical probabilities into vertices with x.y coordinates.
 #'
 #' Select your data frame and the three variables with probabilities.
 #' The returning dataframe will have the x and y coordinates of the 3 points
 #' that represent the vertices.
-#' Plot the vertices and use Prob2coord() to create the xy coordinates
-#' for all the rows.
+#' Plot the vertices and use Prob2coord() to create the xy coordinates for all the rows.
 #'
 #' @param df The data frame where variables can be found.
 #' @param var_left,var_top,var_right Columns in df that contain
@@ -27,10 +29,6 @@
 #' final data frame?.
 #'
 #' @family Heiser transform functions
-#'
-#' @section Warning
-#' the function call will be
-#' function(dataframe, "variable1", "variable2", "variable3")
 #'
 
 CreateVertices <- function(df, var_left, var_top, var_right, verticeName = T) {
@@ -88,11 +86,6 @@ CreateVertices <- function(df, var_left, var_top, var_right, verticeName = T) {
 #'
 #' @family Heiser transform functions
 #'
-#' @section Warning
-#' the function call will be
-#' function(dataframe, "variable1", "variable2", "variable3")
-#'
-
 Prob2Coord<-function(df, var_left, var_top, var_right, append=FALSE) {
         #assigning variables
         varLeft <-df[,var_left]

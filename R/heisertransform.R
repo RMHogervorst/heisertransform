@@ -13,7 +13,7 @@
 #' The CreateVertices function returns 3 points of a triangle that represent the
 #' three categories.
 #'
-#'  @section Prob2Coord function:
+#' @section Prob2Coord function:
 #'  The Prob2Coord function transforms every row into x and y coordinates.
 #'  It uses the CreateVertices function to create the vertices and these vertices
 #'  are then used to transform the x and y coordinates.
