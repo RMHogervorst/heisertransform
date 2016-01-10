@@ -93,9 +93,14 @@ Prob2Coord<-function(df, var_left, var_top, var_right, append=FALSE) {
         varTop <- df[,var_top]
         varRight<-df[,var_right]
         #checks for numeric data
-        if(!class(varLeft)== "numeric"){as.numeric(varLeft)}
-        if(!class(varTop)== "numeric"){as.numeric(varTop)}
-        if(!class(varRight)== "numeric"){as.numeric(varRight)}
+        check_and_fix_num<-function(variablename){
+                if(!class(variablename)== "numeric"){variablename<-as.numeric(variablename)}
+                return(variablename)
+        }
+        varLeft<-check_and_fix_num(varLeft)
+        varTop<-check_and_fix_num(varTop)
+        varRight<-check_and_fix_num(varRight)
+
 #         #create vertices
 #         C1<-mean(varLeft)
 #         C2<-mean(varTop)
