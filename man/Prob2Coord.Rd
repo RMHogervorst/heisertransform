@@ -21,6 +21,9 @@ The returning dataframe will have the x and y coordinates for every row.
 When used in conjuction with CreateVertices() plot the vertices
 and add the points.
 }
+\examples{
+\dontrun {Prob2Coord(testdata, "test1", "test2","test3",append = TRUE)}
+}
 \seealso{
 Other Heiser.transform.functions: \code{\link{CreateVertices}}
 }

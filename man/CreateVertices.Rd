@@ -22,6 +22,9 @@ The returning dataframe will have the x and y coordinates of the 3 points
 that represent the vertices.
 Plot the vertices and use Prob2coord() to create the xy coordinates for all the rows.
 }
+\examples{
+\dontrun {CreateVertices(testdata, "test1", "test2","test3",verticeName = F)}
+}
 \seealso{
 Other Heiser.transform.functions: \code{\link{Prob2Coord}}
 }

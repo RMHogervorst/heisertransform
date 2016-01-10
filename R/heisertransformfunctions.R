@@ -27,10 +27,10 @@
 #' refer to place in final triangle.
 #' @param verticeName Do you want to return the names of the columns in the
 #' final data frame?.
-#'
+#' @examples
+#' \dontrun {CreateVertices(testdata, "test1", "test2","test3",verticeName = F)}
 #' @family Heiser transform functions
-#'
-
+#' @export
 CreateVertices <- function(df, var_left, var_top, var_right, verticeName = T) {
         #assigning variables
         varLeft <- df[, var_left]
@@ -83,9 +83,10 @@ CreateVertices <- function(df, var_left, var_top, var_right, verticeName = T) {
 #' probabilities per row, use "columnnames", names (left, top, right)
 #' refer to place in final triangle.
 #' @param append Return with or without original data frame?.
-#'
+#' @examples
+#' \dontrun {Prob2Coord(testdata, "test1", "test2","test3",append = TRUE)}
 #' @family Heiser transform functions
-#'
+#' @export
 Prob2Coord<-function(df, var_left, var_top, var_right, append=FALSE) {
         #assigning variables
         varLeft <-df[,var_left]

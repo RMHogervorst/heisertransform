@@ -1,5 +1,3 @@
-
-
 # Package idee:
 #         functie (naam dataset, variabele 1 tot 3 (maar mag ook columnnumber zijn)
 #                  vereist dataframe.
@@ -26,3 +24,4 @@ Change Vignette
 Change Readme
 Create tests
 Checks: only execution of tests fails (there are no tests yet)
+There is a mulfunction with CreateVertices
