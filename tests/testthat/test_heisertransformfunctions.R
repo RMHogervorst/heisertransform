@@ -3,9 +3,10 @@ source("R/heisertransformfunctions.R")
 data("testdata")
 a<-CreateVertices(testdata, "test1", "test2","test3",verticeName = F)
 b<-CreateVertices(testdata, "test1", "test2","test3",verticeName = T)
-test_that("output verticeName = T or F are identical"){
-        expect_equal(a, b)
+test_that("output verticeName = T or F are identical",{
+        expect_equal(a, b[,-3])
 }
+)
 # library(testthat)
 # #expectation - test
 # #creer datasets die niet voldoen en kijk of de ze de juiste error geven.
@@ -19,3 +20,4 @@ test_that("output verticeName = T or F are identical"){
 testdata
 View(testdata)
 CreateVertices(F_testdata, "test1", "test2","test3",verticeName = F)
+?test

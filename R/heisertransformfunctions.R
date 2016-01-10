@@ -37,9 +37,9 @@ CreateVertices <- function(df, var_left, var_top, var_right, verticeName = T) {
         varTop <- df[, var_top]
         varRight<- df[, var_right]
         #checks for numeric data
-        if(!class(varLeft)== "numeric"){as.numeric(varLeft)}
-        if(!class(varTop)== "numeric"){as.numeric(varTop)}
-        if(!class(varRight)== "numeric"){as.numeric(varRight)}
+        varLeft<-check_and_fix_num(varLeft)
+        varTop<-check_and_fix_num(varTop)
+        varRight<-check_and_fix_num(varRight)
         #create vertices
         C1<-mean(varLeft)
         C2<-mean(varTop)
@@ -60,11 +60,12 @@ CreateVertices <- function(df, var_left, var_top, var_right, verticeName = T) {
         v3b<- -sqrt(C2/(1-C2))
         V3<- c(v3a, v3b)
         rm(v1a, v1b,v2a,v2b, v3a,v3b)
-        vertices<-rbind(V1,V2,V3)
+        vertices<-rbind(V1,V2,V3) #matrix
+        vertices<-as.data.frame(vertices)
         if(verticeName == TRUE) {
            vertices<-cbind(vertices, c(var_left,var_top,var_right))
         colnames(vertices)<-c("x", "y", "names")
-        return(data.frame(vertices))
+        return(vertices)
         } else if(verticeName == FALSE){
         colnames(vertices)<- c("x","y")
                 return(vertices)
@@ -93,14 +94,9 @@ Prob2Coord<-function(df, var_left, var_top, var_right, append=FALSE) {
         varTop <- df[,var_top]
         varRight<-df[,var_right]
         #checks for numeric data
-        check_and_fix_num<-function(variablename){
-                if(!class(variablename)== "numeric"){variablename<-as.numeric(variablename)}
-                return(variablename)
-        }
         varLeft<-check_and_fix_num(varLeft)
         varTop<-check_and_fix_num(varTop)
         varRight<-check_and_fix_num(varRight)
-
 #         #create vertices
 #         C1<-mean(varLeft)
 #         C2<-mean(varTop)
@@ -128,7 +124,7 @@ Prob2Coord<-function(df, var_left, var_top, var_right, append=FALSE) {
         M<-data.frame(varLeft, varTop, varRight)
         m.pp <- sum(M)
         m.ip <- rowSums(M)
-        m.jp <- colSums(M)
+        #m.jp <- colSums(M)
         #check row sums assumption
         if(!all.equal(m.ip, rep(m.ip[1], length(m.ip))) ) stop("row sums are not identical")
         P <- M/m.pp
@@ -138,3 +134,7 @@ Prob2Coord<-function(df, var_left, var_top, var_right, append=FALSE) {
         ifelse(append == TRUE, return(cbind(df, X)), return(X))
 }
 
+check_and_fix_num<-function(variablename){
+        if(!class(variablename)== "numeric"){variablename<-as.numeric(variablename)}
+        return(variablename)
+}
