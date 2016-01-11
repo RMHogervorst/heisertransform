@@ -255,6 +255,26 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <p>“He who gives up [code] safety for [code] speed deserves neither.” (<a href="https://twitter.com/hadleywickham/status/504368538874703872">via</a>)</p>
 </blockquote>
 </div>
+<div id="example" class="section level2">
+<h2>example</h2>
+<p>some text</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># library(heisertransform)</span>
+<span class="co"># test&lt;-data.frame(</span>
+<span class="co">#         c(.80,.85,.56,.52,.52,.50,.48,.48,.44,.15,.20),</span>
+<span class="co">#         c(.19,.12,.22,.23,.24,.25,.26,.27,.28,.63,.06),</span>
+<span class="co">#         c(.01,.03,.22,.25,.24,.25,.26,.25,.28,.22,.74)</span>
+<span class="co"># )</span>
+<span class="co"># names(test)&lt;- c(&quot;test1&quot;, &quot;test2&quot;,&quot;test3&quot;)</span>
+<span class="co"># #tests voor dataset</span>
+<span class="co"># test$cat&lt;-c(&quot;test1&quot;,&quot;test1&quot;,&quot;middel&quot;,&quot;middel&quot;,&quot;middel&quot;,&quot;middel&quot;,&quot;middel&quot;,&quot;middel&quot;,&quot;middel&quot;,&quot;test2&quot;,&quot;test3&quot;)</span>
+<span class="co"># </span>
+<span class="co"># coord&lt;- Heisertransform2Coordinates(test, 1,2,3)</span>
+<span class="co"># # coord2&lt;- Heisertransform2Coordinates(test, 1,2,3, T )</span>
+<span class="co"># # coord2$cat&lt;-as.factor(coord2$cat)</span>
+<span class="co"># vert&lt;- CreateVertices(test, 1,2,3, F)</span>
+<span class="co"># plot(vert)</span>
+<span class="co"># points(coord)</span></code></pre>
+</div>
 <div class="footnotes">
 <hr />
 <ol>

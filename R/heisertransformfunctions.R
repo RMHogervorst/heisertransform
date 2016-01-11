@@ -97,28 +97,6 @@ Prob2Coord<-function(df, var_left, var_top, var_right, append=FALSE) {
         varLeft<-check_and_fix_num(varLeft)
         varTop<-check_and_fix_num(varTop)
         varRight<-check_and_fix_num(varRight)
-#         #create vertices
-#         C1<-mean(varLeft)
-#         C2<-mean(varTop)
-#         C3<-mean(varRight)
-#         #check assumption that column means are equal to 1
-#         if(!sum(C1,C2,C3)==1){stop("column means are not equal to 1")}
-#         #Vertices uitrekenen volgens formule (aparte functie maken en oproepen?)
-#         #V1
-#         v1a<- -sqrt(C3/(C1*(C1+C3)))
-#         v1b<- -sqrt(C2/(1-C2))
-#         V1<- c( v1a, v1b)
-#         #V2
-#         v2a<-0
-#         v2b<-sqrt((1-C2)/C2)
-#         V2<- c( v2a, v2b)
-#         #V3
-#         v3a<-sqrt(C1/(C3*(C1+C3)))
-#         v3b<- -sqrt(C2/(1-C2))
-#         V3<- c(v3a, v3b)
-#         rm(v1a, v1b,v2a,v2b, v3a,v3b)
-#         vertices<-rbind(V1,V2,V3)
-#         #
         vertices<-CreateVertices(df, var_left, var_top, var_right, verticeName = FALSE)
         #create dataframe
         M<-data.frame(varLeft, varTop, varRight)
@@ -131,6 +109,7 @@ Prob2Coord<-function(df, var_left, var_top, var_right, append=FALSE) {
         r.i <- m.ip[1]/m.pp
         X <- 1/r.i * as.matrix(P) %*% as.matrix(vertices)
         colnames(X)<-c("x", "y")
+        X<-data.frame(X)
         ifelse(append == TRUE, return(cbind(df, X)), return(X))
 }
 
