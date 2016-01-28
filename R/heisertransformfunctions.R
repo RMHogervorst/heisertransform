@@ -12,8 +12,6 @@
 #CreateVertices, a function to create vertices.
 #
 
-
-
 #' CreateVertices Transforms categorical probabilities into vertices with x.y coordinates.
 #'
 #' Select your data frame and the three variables with probabilities.
@@ -46,22 +44,7 @@ CreateVertices <- function(df, var_left, var_top, var_right, verticeName = T) {
         C3<-mean(varRight)
         #check assumption that column means are equal to 1
         if(!sum(C1,C2,C3)==1){stop("column means are not equal to 1")}
-        #Vertices uitrekenen volgens formule (aparte functie maken en oproepen?)
-        #V1
-        v1a<- -sqrt(C3/(C1*(C1+C3)))
-        v1b<- -sqrt(C2/(1-C2))
-        V1<- c( v1a, v1b)
-        #V2
-        v2a<-0
-        v2b<-sqrt((1-C2)/C2)
-        V2<- c( v2a, v2b)
-        #V3
-        v3a<-sqrt(C1/(C3*(C1+C3)))
-        v3b<- -sqrt(C2/(1-C2))
-        V3<- c(v3a, v3b)
-        rm(v1a, v1b,v2a,v2b, v3a,v3b)
-        vertices<-rbind(V1,V2,V3) #matrix
-        vertices<-as.data.frame(vertices)
+        vertices<-vertices_create(C1,C2,C3)
         if(verticeName == TRUE) {
            vertices<-cbind(vertices, c(var_left,var_top,var_right))
         colnames(vertices)<-c("x", "y", "names")
@@ -113,7 +96,3 @@ Prob2Coord<-function(df, var_left, var_top, var_right, append=FALSE) {
         ifelse(append == TRUE, return(cbind(df, X)), return(X))
 }
 
-check_and_fix_num<-function(variablename){
-        if(!class(variablename)== "numeric"){variablename<-as.numeric(variablename)}
-        return(variablename)
-}
