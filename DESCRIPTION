@@ -12,12 +12,13 @@ Description: Based on Heiser 2004, this package transforms 3 categories of f.i.
     probability of belonging to this cluster.See also: Geometric representation of
     association between categories, 2004 , Psychometrika VOL. 69, NO. 4, 513-545.
 Depends:
-    R (>= 3.0.1)
+    R (>= 3.0.1),
 License: file LICENSE
 LazyData: TRUE
 Suggests:
     knitr,
     rmarkdown,
-    testthat
+    testthat,
+    ggplot2 (>= 2.0.0)
 VignetteBuilder: knitr
 RoxygenNote: 5.0.1
