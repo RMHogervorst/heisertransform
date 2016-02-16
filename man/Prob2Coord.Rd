@@ -25,6 +25,7 @@ and add the points.
 \dontrun {Prob2Coord(testdata, "test1", "test2","test3",append = TRUE)}
 }
 \seealso{
-Other Heiser.transform.functions: \code{\link{CreateVertices}}
+Other Heiser.transform.functions: \code{\link{CreateVertices}},
+  \code{\link{heisertransform}}
 }
 

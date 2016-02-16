@@ -27,4 +27,8 @@ three categories.
  It uses the CreateVertices function to create the vertices and these vertices
  are then used to transform the x and y coordinates.
 }
+\seealso{
+Other Heiser.transform.functions: \code{\link{CreateVertices}},
+  \code{\link{Prob2Coord}}
+}
 

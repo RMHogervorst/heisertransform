@@ -26,6 +26,7 @@ Plot the vertices and use Prob2coord() to create the xy coordinates for all the 
 \dontrun {CreateVertices(testdata, "test1", "test2","test3",verticeName = F)}
 }
 \seealso{
-Other Heiser.transform.functions: \code{\link{Prob2Coord}}
+Other Heiser.transform.functions: \code{\link{Prob2Coord}},
+  \code{\link{heisertransform}}
 }
 
