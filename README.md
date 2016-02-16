@@ -6,6 +6,15 @@ Introduction - Quick start
 
 This package helps in visualizing probability information for 3 predicted classes. For instance with multinomial regression. It visualizes probability information from 3 classes into a 2 dimensional space. \[example\]
 
+Use case:
+=========
+
+You have created probabilties for three groups from your multinomial, but visualizing this information is often difficult.
+
+\[table view of three probabilties\]
+
+\[example in one plot\]
+
 To install
 ----------
 
