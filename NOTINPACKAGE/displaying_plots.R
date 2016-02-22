@@ -116,3 +116,109 @@ do_pretty2(vertices_create(.50,.40,.10)) + do_pretty3(vertices_create(.50,.35,.1
 #drie versies
 do_pretty2(vertices_create(.50,.40,.10)) + do_pretty3(vertices_create(.50,.10,.40), "red")+
         do_pretty3(vertices_create(.10,.50,.40), "grey")+do_pretty3(vertices_create(.10,.40,.50), "orange")
+
+
+# creatie van string van 3 getallen
+# loopje, geef increment in functie. function(start, stop, increment)
+
+a<-.50
+b <- (1 -a )/2
+plot_triangles<-function(a) {
+        b <- (0.8-a)
+        stopifnot(a+b+.2==1)
+do_pretty2(vertices_create(b, a, .2)) + theme_heiser +
+        geom_label(aes(0,0), label = paste("top=",a,"\n left=",b, "\nright=0.2"))
+}
+
+plot_triangles2<-function(a) {
+        b <- (0.8-a)
+        stopifnot(a+b+.2==1)
+        do_pretty2(vertices_create(b, a, .2))  +
+                geom_label(aes(0,0), label = paste("top=",a,"\n left=",b, "\nright=0.2"))
+}
+plot_triangles3<-function(a) {
+        b <- (1 -a )/2
+        stopifnot(a+2*b==1)
+        do_pretty2(vertices_create(b, a, b))  +
+                geom_label(aes(0,0), label = paste("top=",a,"\n left=",b, "\nright=0.2"))
+}
+plot_triangles(.7)
+ggsave("NOTINPACKAGE/files/tri7.png")
+plot_triangles(.6)
+plot_triangles(.5)
+plot_triangles(.4) +theme_gray()
+ggsave(filename = paste("NOTINPACKAGE/files/tri",4,".png",sep = ""))
+plot_triangles(.3)
+plot_triangles(.2)
+plot_triangles(.1)
+i<-7
+for (i in 1:7) {
+        plot_triangles(i/10)
+        ggsave(filename = paste("NOTINPACKAGE/files/tri",i,".png",sep = ""))
+}
+
+for (i in 1:7) {
+        plot_triangles2(i/10)
+        ggsave(filename = paste("NOTINPACKAGE/files/triangles",i,".jpg",sep = ""))
+}
+for (i in 1:7) {
+        plot_triangles3(i/10)
+        ggsave(filename = paste("NOTINPACKAGE/files/triangles_top",i,".jpg",sep = ""))
+}
+system("C:/Program Files/ImageMagick-6.9.3-Q16/convert -delay 0.7 NOTINPACKAGE/files/tri*.png NOTINPACKAGE/files/tri.gif")
+
+jpg("NOTINPACKAGE/files/foo%02d.png")
+for (i in 1:7) {
+        plot_triangles(i/10)
+}
+dev.off()
+
+make.gif <- function(){
+        unlink("plot.gif")
+        system("convert -delay 0.5 plot*.jpg plot.gif")
+}
+i<-1
+saveGIF({
+        for (i in 1:7) {
+                plot_triangles(3/10)
+        },
+})
+saveGIF({
+        for (i in 1:10) plot(runif(10), ylim = 0:1)
+})
+
+## dit werkt niet, ik weet nog niet waarom
+# des = c("testing things",
+#          "Oh, really?!")
+# saveHTML({
+#         ani.options(interval = 0.5)
+        # for (i in 0.1:0.2) {
+        #         plot_triangles(i)
+#                 ani.pause()
+#         }
+# }, img.name = "rplot", single.opts = "utf8: false", autoplay = FALSE,
+# interval = 0.5, imgdir = "norm_dir", htmlfile = "test.html",
+# ani.height = 400, ani.width = 600, title = "several triangles",
+# description = des)
+
+
+### checking options to animate triangles ####
+## animation package or gganimate seem to work
+## need to find a nice example.
+## we can create an interactive html or a looping gif.
+#devtools::install_github("dgrtwo/gganimate")
+library(gganimate)
+
+
+library(gapminder)
+library(ggplot2)
+theme_set(theme_bw())
+library(gganimate)
+p <- ggplot(gapminder, aes(gdpPercap, lifeExp, size = pop, color = continent, frame = year)) +
+        geom_point() +
+        scale_x_log10()
+gg_animate(p)
+gg_animate(p, "output2.gif")
+gg_animate_save(p, "output.gif")
+
+ggplot
