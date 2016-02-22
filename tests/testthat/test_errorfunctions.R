@@ -23,15 +23,27 @@ test_that("check and fix num gives error with unconvertible characters", {
         expect_warning(check_and_fix_num(sample(letters, 8)), regexp = "NAs")
 })
 test_that("verticeName error works", {
-        expect_error(CreateVertices(errorset,"var1", "var2", "var3", verticeName = "name"), regexp = "verticeName needs to be TRUE or FALSE")
+        expect_error(CreateVertices(testdata,"test1", "test2", "test3", verticeName = "name"), regexp = "verticeName needs to be TRUE or FALSE")
 })
 test_that("rowsums larger or smaller than 1 are failing", {
         expect_error(CreateVertices(errorset,"var1", "var2", "vartoomuch", verticeName = T),regexp = "column means are not equal to 1" )
         expect_error(CreateVertices(errorset,"var1", "var2", "vartoolittle", verticeName = T),regexp = "column means are not equal to 1" )
 })
 
-#stop("row sums are not identical")
+# test_that("invalid types are NOT accepted",
+#           {
+#                 expect_error()
+#                   # test met en zonder df,
+#           })
 
+test_that("valid types ARE accepted", {
+        expect_silent(inputchecks(iris, "Sepal.Length", "Sepal.Width",  "Petal.Length"))
+        expect_silent(inputchecks(var_left =  iris$Sepal.Length, var_top= iris$Sepal.Width, var_right= iris$Petal.Width))
+        #echte functie
+        #CreateVertices(var_left =  errorset$var1, var_top= errorset$var2, var_right= errorset$var3)
+
+
+})
 
 #test_that("")
 # library(testthat)

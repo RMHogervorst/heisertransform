@@ -23,3 +23,14 @@ test_that("check_and_fix_num works",{
         class(check_and_fix_num(as.character(rnorm(7))))=="numeric"
 
 })
+test_that("CreateVertices creates a dataframe of 3 by 3", {
+        #CreateVertices(var_left =  errorset$var1, var_top= errorset$var2, var_right= errorset$var3)[4,]
+        expect_equal(dim(CreateVertices(testdata, "test1", "test2","test3",verticeName = F))[1], 3)
+        expect_equal(dim(CreateVertices(testdata, "test1", "test2","test3",verticeName = T))[1], 3)
+})
+# make it so that CreateVertices(df$a,df$b,df$c) and CreateVertices( df, "a", "b","c") are identical
+
+test_that("CreateVertices(df$a,df$b,df$c) and CreateVertices( df, a,b,c) are identical", {
+        expect_identical(CreateVertices(testdata, "test1", "test2","test3"),
+                 CreateVertices(testdata$test1, testdata$test2, testdata$test3))
+})

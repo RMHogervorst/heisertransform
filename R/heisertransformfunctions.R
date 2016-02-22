@@ -30,10 +30,22 @@
 #' @family Heiser transform functions
 #' @export
 CreateVertices <- function(df, var_left, var_top, var_right, verticeName = T) {
-        #assigning variables
-        varLeft <- df[, var_left]
-        varTop <- df[, var_top]
-        varRight<- df[, var_right]
+        # if df contains $, shift everyting up to the right
+        # if(grepl("\\$", df)){#do the thing}
+        #modified so that df is optional
+        if(missing(df)){
+                inputchecks(var_left = var_left, var_top = var_top, var_right = var_right)
+                varLeft<-var_left
+                varTop<-var_top
+                varRight<-var_right
+
+        } else{
+                inputchecks(df,var_left, var_top, var_right)
+                varLeft <- df[, var_left]
+                varTop <- df[, var_top]
+                varRight<- df[, var_right]
+        }
+
         #checks for numeric data
         varLeft<-check_and_fix_num(varLeft)
         varTop<-check_and_fix_num(varTop)
