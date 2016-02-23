@@ -79,14 +79,14 @@ CreateVertices <- function(df, var_left, var_top, var_right, verticeName = T) {
 Prob2Coord<-function(df, var_left, var_top, var_right, append=FALSE) {
         inputchecks(df,var_left, var_top, var_right)
         vertices<-CreateVertices(df, var_left, var_top, var_right, verticeName = FALSE)
-        #checks for numeric data
-        varLeft<-check_and_fix_num(varLeft)
-        varTop<-check_and_fix_num(varTop)
-        varRight<-check_and_fix_num(varRight)
         #assigning variables
         varLeft <-df[,var_left]
         varTop <- df[,var_top]
         varRight<-df[,var_right]
+        #checks for numeric data
+        varLeft<-check_and_fix_num(varLeft)
+        varTop<-check_and_fix_num(varTop)
+        varRight<-check_and_fix_num(varRight)
         #create dataframe
         M<-data.frame(varLeft, varTop, varRight)
         m.pp <- sum(M)
