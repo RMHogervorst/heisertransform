@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-last change 2016- 02-08
+last change "`r Sys.Date()`"
 
 # Introduction - Quick start
 This package helps in visualizing probability information for 3 predicted classes.
@@ -29,8 +29,9 @@ but visualizing this information is often difficult.
 [table view of three probabilties]
 
 [example in one plot]
-
+<div style="width:500px; height=500px">
 ![animation](NOTINPACKAGE/files/triangle_movement.gif)
+</div>
 
 ## To install
 In the future this package will be on CRAN. 

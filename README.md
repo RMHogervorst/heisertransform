@@ -1,5 +1,5 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-last change 2016- 02-08
+last change "2016-02-23"
 
 Introduction - Quick start
 ==========================
@@ -14,7 +14,6 @@ You have created probabilties for three groups from your multinomial, but visual
 \[table view of three probabilties\]
 
 \[example in one plot\]
-
 ![animation](NOTINPACKAGE/files/triangle_movement.gif)
 
 To install
