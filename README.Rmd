@@ -30,7 +30,7 @@ but visualizing this information is often difficult.
 
 [example in one plot]
 
-![animation](NOTINPACKAGE/files/trianglemovement.gif)
+![animation](NOTINPACKAGE/files/triangle_movement.gif)
 
 ## To install
 In the future this package will be on CRAN. 
