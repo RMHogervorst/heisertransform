@@ -29,28 +29,10 @@ test_that("rowsums larger or smaller than 1 are failing", {
         expect_error(CreateVertices(errorset,"var1", "var2", "vartoomuch", verticeName = T),regexp = "column means are not equal to 1" )
         expect_error(CreateVertices(errorset,"var1", "var2", "vartoolittle", verticeName = T),regexp = "column means are not equal to 1" )
 })
-# test_that("invalid types are NOT accepted",
-#           {
-#                 expect_error()
-#                   # test met en zonder df,
-#           })
-
-test_that("valid types ARE accepted by inputchecks", {
-        expect_silent(inputchecks(iris, "Sepal.Length", "Sepal.Width",  "Petal.Length"))
+test_that("invalid input gives error",{
+        expect_error(CreateVertices(testdata, test1, "test2", "test3" ))
+        expect_error(CreateVertices(testdata, "test1", "Test2", "test3" ), regexp = "undefined columns selected")
+        expect_error(Prob2Coord(errorset, "var1", "var2", "var_na" ), regexp = "undefined columns selected")
+        expect_error(Prob2Coord(errorset$var1, "var1", "var2", "var3" ), regexp = "should be of type data.frame")
+        expect_error(Prob2Coord(iris, "Sepal.Length", "Sepal.Width",  "Petal.Length"), regexp = "column means are not equal to 1")
 })
-
-#test_that("")
-# library(testthat)
-# #expectation - test
-# #creer datasets die niet voldoen en kijk of de ze de juiste error geven.
-#
-# ### errortests
-# #tests of errors inderdaad kloppen. Dus bij niet nummeriek, niet gemiddelde optellen tot 1.
-#
-# #check assumption that column means are equal to 1
-# if(!sum(C1,C2,C3)==1){stop("column means are not equal to 1")}
-#
-# testdata
-# View(testdata)
-# CreateVertices(F_testdata, "test1", "test2","test3",verticeName = F)
-# ?test

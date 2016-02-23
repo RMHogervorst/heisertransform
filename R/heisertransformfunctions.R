@@ -32,6 +32,7 @@
 #' @family Heiser transform functions
 #' @export
 CreateVertices <- function(df, var_left, var_top, var_right, verticeName = T) {
+        inputchecks(df,var_left, var_top, var_right)
         #assigning variables
         varLeft <- df[, var_left]
         varTop <- df[, var_top]
@@ -76,15 +77,16 @@ CreateVertices <- function(df, var_left, var_top, var_right, verticeName = T) {
 #' @family Heiser transform functions
 #' @export
 Prob2Coord<-function(df, var_left, var_top, var_right, append=FALSE) {
-        #assigning variables
-        varLeft <-df[,var_left]
-        varTop <- df[,var_top]
-        varRight<-df[,var_right]
+        inputchecks(df,var_left, var_top, var_right)
+        vertices<-CreateVertices(df, var_left, var_top, var_right, verticeName = FALSE)
         #checks for numeric data
         varLeft<-check_and_fix_num(varLeft)
         varTop<-check_and_fix_num(varTop)
         varRight<-check_and_fix_num(varRight)
-        vertices<-CreateVertices(df, var_left, var_top, var_right, verticeName = FALSE)
+        #assigning variables
+        varLeft <-df[,var_left]
+        varTop <- df[,var_top]
+        varRight<-df[,var_right]
         #create dataframe
         M<-data.frame(varLeft, varTop, varRight)
         m.pp <- sum(M)
