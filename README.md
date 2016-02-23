@@ -14,7 +14,8 @@ You have created probabilties for three groups from your multinomial, but visual
 \[table view of three probabilties\]
 
 \[example in one plot\]
-![animation](NOTINPACKAGE/files/triangle_movement.gif)
+
+<img src="NOTINPACKAGE/files/triangle_movement.gif" height="400px" width="400px" />
 
 To install
 ----------
