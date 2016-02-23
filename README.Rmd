@@ -30,6 +30,8 @@ but visualizing this information is often difficult.
 
 [example in one plot]
 
+![animation]{animation.gif}
+
 ## To install
 In the future this package will be on CRAN. 
 To install this r-package make sure you have installed devtools, and install 

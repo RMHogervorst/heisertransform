@@ -1,6 +1,6 @@
 ---
-title: "Vignette Title"
-author: "Vignette Author"
+title: "Heiser transform uses"
+author: "Roel M Hogervorst"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
@@ -9,73 +9,84 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-Vignettes are long form documentation commonly included in packages. Because they are part of the distribution of the package, they need to be as compact as possible. The `html_vignette` output type provides a custom style sheet (and tweaks some options) to ensure that the resulting html is as small as possible. The `html_vignette` format:
-
-- Never uses retina figures
-- Has a smaller default figure size
-- Uses a custom CSS stylesheet instead of the default Twitter Bootstrap style
-
-## Vignette Info
-
-Note the various macros within the `vignette` section of the metadata block above. These are required in order to instruct R how to build the vignette. Note that you should change the `title` field and the `\VignetteIndexEntry` to match the title of your vignette.
-
-## Styles
-
-The `html_vignette` template includes a basic CSS theme. To override this theme you can specify your own CSS in the document metadata as follows:
-
-    output: 
-      rmarkdown::html_vignette:
-        css: mystyles.css
-
-## Figures
-
-The figure sizes have been customised so that you can easily put two images side-by-side. 
-
-```{r, fig.show='hold'}
-plot(1:10)
-plot(10:1)
+Here is some exampledata
+```{r}
+library(heisertransform)
+testdata
 ```
 
-You can enable figure captions by `fig_caption: yes` in YAML:
 
-    output:
-      rmarkdown::html_vignette:
-        fig_caption: yes
 
-Then you can use the chunk option `fig.cap = "Your figure caption."` in **knitr**.
-
-## More Examples
-
-You can write math expressions, e.g. $Y = X\beta + \epsilon$, footnotes^[A footnote here.], and tables, e.g. using `knitr::kable()`.
-
-```{r, echo=FALSE, results='asis'}
-knitr::kable(head(mtcars, 10))
+```{r}
+library(heisertransform)
+temp<-CreateVertices(testdata, "test1", "test2","test3",verticeName = F)
+plot(temp, main = "Endresult of heisertransform", pch = 17, col = "red")
+points(Prob2Coord(testdata, "test1", "test2","test3"), col= "darkgreen", pch = 19)
+segments(x0 = temp[1,1], y0 = temp[1,2], x1 =temp[2,1], y1 = temp[2,2])
+segments(x0 = temp[2,1], y0 = temp[2,2], x1 =temp[3,1], y1 = temp[3,2])
+segments(x0 = temp[3,1], y0 = temp[3,2], x1 =temp[1,1], y1 = temp[1,2])
 ```
 
-Also a quote using `>`:
 
-> "He who gives up [code] safety for [code] speed deserves neither."
-([via](https://twitter.com/hadleywickham/status/504368538874703872))
-
-## example
-some text
-
-```{r example file with plot}
-# library(heisertransform)
-# test<-data.frame(
-#         c(.80,.85,.56,.52,.52,.50,.48,.48,.44,.15,.20),
-#         c(.19,.12,.22,.23,.24,.25,.26,.27,.28,.63,.06),
-#         c(.01,.03,.22,.25,.24,.25,.26,.25,.28,.22,.74)
-# )
-# names(test)<- c("test1", "test2","test3")
-# #tests voor dataset
-# test$cat<-c("test1","test1","middel","middel","middel","middel","middel","middel","middel","test2","test3")
-# 
-# coord<- Heisertransform2Coordinates(test, 1,2,3)
-# # coord2<- Heisertransform2Coordinates(test, 1,2,3, T )
-# # coord2$cat<-as.factor(coord2$cat)
-# vert<- CreateVertices(test, 1,2,3, F)
-# plot(vert)
-# points(coord)
+First a simple plot of the vertices and points.
+```{r}
+library(ggplot2)
+vert<- CreateVertices(testdata, "test1", "test2","test3",verticeName = T)
+points<-Prob2Coord(testdata, "test1", "test2","test3", append = T)
+ggplot(data = vert, aes(x,y))+geom_point( color = "red") + 
+        geom_point(data = points, aes(x,y), colour = "darkgreen")
 ```
 
+The same plot but with other colours. 
+
+```{r}
+ggplot(data = vert, aes(x,y))+geom_point( color = "red") + 
+        geom_point(data =Prob2Coord(testdata, "test1", "test2","test3", append = T), aes(x,y, colour = cat))+
+        geom_line(data = vert, aes(x,y))+
+        geom_segment(data = vert, aes(x = x[1], xend = x[3], y= y[1], yend= y[3]))
+```
+
+
+Things look better when you put them into functions or lists.
+All ggplot parts are lists, so for example.
+ 
+```{r list}
+lines<-list(geom_line(data = vert, aes(x,y), colour = "#122b3e"),
+              geom_segment(data = vert, aes(x = x[1], xend = x[3], y= y[1], yend= y[3]), colour = "#122b3e" ))
+ points<-list(geom_point(data = vert[1,], aes(x, y),  shape = 17,  size = 5, colour = "#cc0000"),
+              geom_point(data = vert[2,], aes(x, y),  shape = 17,  size = 5, stroke = 2, colour = "#ffca00"),
+              geom_point(data = vert[3,], aes(x, y),  shape = 17,  size = 5, stroke = 2, colour = "#00b300")
+ )
+ 
+  text<- list(geom_text(data = vert[1,], aes(x,y, label = "left"), vjust =1.5, hjust = 0, colour = "#cc0000") ,
+               geom_text(data = vert[2,], aes(x,y, label = "top"), vjust =0, hjust = 1.5, colour = "#ffca00") ,
+               geom_text(data = vert[3,], aes(x,y, label = "right"), vjust =1.5, hjust = 1, colour = "#00b300")
+  )
+  g<-ggplot() +lines +points + text
+  g
+  g+geom_point(data =Prob2Coord(testdata, "test1", "test2","test3", append = T), aes(x,y, colour = cat))
+```
+
+
+The default ggplot theme is distracting, the axes are not really what matters here.
+The minimal theme is somewhat better, but it's even better to get rid of all the axis.
+It quite easy to create a new theme
+ 
+```{r}
+g+  theme_minimal()
+ #creating a new theme
+ theme_heiser<-theme_grey() + theme(axis.line=element_blank(),
+                                    axis.text.x=element_blank(),
+                                    axis.text.y=element_blank(),
+                                    axis.ticks=element_blank(),
+                                    axis.title.x=element_blank(),
+                                    axis.title.y=element_blank(),
+                                    legend.position="bottom",
+                                    panel.background=element_blank(),
+                                    panel.border=element_blank(),
+                                    panel.grid.major=element_blank(),
+                                    panel.grid.minor=element_blank(),
+                                    plot.background=element_blank())
+g+geom_point(data =Prob2Coord(testdata, "test1", "test2","test3", append = T), aes(x,y, colour = cat)) +
+          theme_heiser
+  ```

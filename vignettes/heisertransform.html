@@ -7,43 +7,57 @@
 <meta charset="utf-8">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<meta name="author" content="Vignette Author" />
+<meta name="author" content="Roel M Hogervorst" />
 
-<meta name="date" content="2016-01-02" />
+<meta name="date" content="2016-02-23" />
 
-<title>Vignette Title</title>
+<title>Heiser transform uses</title>
 
 
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
+div.sourceCode { overflow-x: auto; }
 table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
   margin: 0; padding: 0; vertical-align: baseline; border: none; }
 table.sourceCode { width: 100%; line-height: 100%; }
 td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
 td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; }
-code > span.dt { color: #902000; }
-code > span.dv { color: #40a070; }
-code > span.bn { color: #40a070; }
-code > span.fl { color: #40a070; }
-code > span.ch { color: #4070a0; }
-code > span.st { color: #4070a0; }
-code > span.co { color: #60a0b0; font-style: italic; }
-code > span.ot { color: #007020; }
-code > span.al { color: #ff0000; font-weight: bold; }
-code > span.fu { color: #06287e; }
-code > span.er { color: #ff0000; font-weight: bold; }
-</style>
-<style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 </style>
 
 
-<link href="data:text/css,body%20%7B%0A%20%20background%2Dcolor%3A%20%23fff%3B%0A%20%20margin%3A%201em%20auto%3B%0A%20%20max%2Dwidth%3A%20700px%3B%0A%20%20overflow%3A%20visible%3B%0A%20%20padding%2Dleft%3A%202em%3B%0A%20%20padding%2Dright%3A%202em%3B%0A%20%20font%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0A%20%20font%2Dsize%3A%2014px%3B%0A%20%20line%2Dheight%3A%201%2E35%3B%0A%7D%0A%0A%23header%20%7B%0A%20%20text%2Dalign%3A%20center%3B%0A%7D%0A%0A%23TOC%20%7B%0A%20%20clear%3A%20both%3B%0A%20%20margin%3A%200%200%2010px%2010px%3B%0A%20%20padding%3A%204px%3B%0A%20%20width%3A%20400px%3B%0A%20%20border%3A%201px%20solid%20%23CCCCCC%3B%0A%20%20border%2Dradius%3A%205px%3B%0A%0A%20%20background%2Dcolor%3A%20%23f6f6f6%3B%0A%20%20font%2Dsize%3A%2013px%3B%0A%20%20line%2Dheight%3A%201%2E3%3B%0A%7D%0A%20%20%23TOC%20%2Etoctitle%20%7B%0A%20%20%20%20font%2Dweight%3A%20bold%3B%0A%20%20%20%20font%2Dsize%3A%2015px%3B%0A%20%20%20%20margin%2Dleft%3A%205px%3B%0A%20%20%7D%0A%0A%20%20%23TOC%20ul%20%7B%0A%20%20%20%20padding%2Dleft%3A%2040px%3B%0A%20%20%20%20margin%2Dleft%3A%20%2D1%2E5em%3B%0A%20%20%20%20margin%2Dtop%3A%205px%3B%0A%20%20%20%20margin%2Dbottom%3A%205px%3B%0A%20%20%7D%0A%20%20%23TOC%20ul%20ul%20%7B%0A%20%20%20%20margin%2Dleft%3A%20%2D2em%3B%0A%20%20%7D%0A%20%20%23TOC%20li%20%7B%0A%20%20%20%20line%2Dheight%3A%2016px%3B%0A%20%20%7D%0A%0Atable%20%7B%0A%20%20margin%3A%201em%20auto%3B%0A%20%20border%2Dwidth%3A%201px%3B%0A%20%20border%2Dcolor%3A%20%23DDDDDD%3B%0A%20%20border%2Dstyle%3A%20outset%3B%0A%20%20border%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0A%20%20border%2Dwidth%3A%202px%3B%0A%20%20padding%3A%205px%3B%0A%20%20border%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0A%20%20border%2Dwidth%3A%201px%3B%0A%20%20border%2Dstyle%3A%20inset%3B%0A%20%20line%2Dheight%3A%2018px%3B%0A%20%20padding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0A%20%20border%2Dleft%2Dstyle%3A%20none%3B%0A%20%20border%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0A%20%20background%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0A%0Ap%20%7B%0A%20%20margin%3A%200%2E5em%200%3B%0A%7D%0A%0Ablockquote%20%7B%0A%20%20background%2Dcolor%3A%20%23f6f6f6%3B%0A%20%20padding%3A%200%2E25em%200%2E75em%3B%0A%7D%0A%0Ahr%20%7B%0A%20%20border%2Dstyle%3A%20solid%3B%0A%20%20border%3A%20none%3B%0A%20%20border%2Dtop%3A%201px%20solid%20%23777%3B%0A%20%20margin%3A%2028px%200%3B%0A%7D%0A%0Adl%20%7B%0A%20%20margin%2Dleft%3A%200%3B%0A%7D%0A%20%20dl%20dd%20%7B%0A%20%20%20%20margin%2Dbottom%3A%2013px%3B%0A%20%20%20%20margin%2Dleft%3A%2013px%3B%0A%20%20%7D%0A%20%20dl%20dt%20%7B%0A%20%20%20%20font%2Dweight%3A%20bold%3B%0A%20%20%7D%0A%0Aul%20%7B%0A%20%20margin%2Dtop%3A%200%3B%0A%7D%0A%20%20ul%20li%20%7B%0A%20%20%20%20list%2Dstyle%3A%20circle%20outside%3B%0A%20%20%7D%0A%20%20ul%20ul%20%7B%0A%20%20%20%20margin%2Dbottom%3A%200%3B%0A%20%20%7D%0A%0Apre%2C%20code%20%7B%0A%20%20background%2Dcolor%3A%20%23f7f7f7%3B%0A%20%20border%2Dradius%3A%203px%3B%0A%20%20color%3A%20%23333%3B%0A%7D%0Apre%20%7B%0A%20%20white%2Dspace%3A%20pre%2Dwrap%3B%20%20%20%20%2F%2A%20Wrap%20long%20lines%20%2A%2F%0A%20%20border%2Dradius%3A%203px%3B%0A%20%20margin%3A%205px%200px%2010px%200px%3B%0A%20%20padding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0A%20%20background%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0A%0Acode%20%7B%0A%20%20font%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0A%20%20font%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0A%20%20padding%3A%202px%200px%3B%0A%7D%0A%0Adiv%2Efigure%20%7B%0A%20%20text%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0A%20%20background%2Dcolor%3A%20%23FFFFFF%3B%0A%20%20padding%3A%202px%3B%0A%20%20border%3A%201px%20solid%20%23DDDDDD%3B%0A%20%20border%2Dradius%3A%203px%3B%0A%20%20border%3A%201px%20solid%20%23CCCCCC%3B%0A%20%20margin%3A%200%205px%3B%0A%7D%0A%0Ah1%20%7B%0A%20%20margin%2Dtop%3A%200%3B%0A%20%20font%2Dsize%3A%2035px%3B%0A%20%20line%2Dheight%3A%2040px%3B%0A%7D%0A%0Ah2%20%7B%0A%20%20border%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0A%20%20padding%2Dtop%3A%2010px%3B%0A%20%20padding%2Dbottom%3A%202px%3B%0A%20%20font%2Dsize%3A%20145%25%3B%0A%7D%0A%0Ah3%20%7B%0A%20%20border%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0A%20%20padding%2Dtop%3A%2010px%3B%0A%20%20font%2Dsize%3A%20120%25%3B%0A%7D%0A%0Ah4%20%7B%0A%20%20border%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0A%20%20margin%2Dleft%3A%208px%3B%0A%20%20font%2Dsize%3A%20105%25%3B%0A%7D%0A%0Ah5%2C%20h6%20%7B%0A%20%20border%2Dbottom%3A%201px%20solid%20%23ccc%3B%0A%20%20font%2Dsize%3A%20105%25%3B%0A%7D%0A%0Aa%20%7B%0A%20%20color%3A%20%230033dd%3B%0A%20%20text%2Ddecoration%3A%20none%3B%0A%7D%0A%20%20a%3Ahover%20%7B%0A%20%20%20%20color%3A%20%236666ff%3B%20%7D%0A%20%20a%3Avisited%20%7B%0A%20%20%20%20color%3A%20%23800080%3B%20%7D%0A%20%20a%3Avisited%3Ahover%20%7B%0A%20%20%20%20color%3A%20%23BB00BB%3B%20%7D%0A%20%20a%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0A%20%20%20%20text%2Ddecoration%3A%20underline%3B%20%7D%0A%20%20a%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0A%20%20%20%20text%2Ddecoration%3A%20underline%3B%20%7D%0A%0A%2F%2A%20Class%20described%20in%20https%3A%2F%2Fbenjeffrey%2Ecom%2Fposts%2Fpandoc%2Dsyntax%2Dhighlighting%2Dcss%0A%20%20%20Colours%20from%20https%3A%2F%2Fgist%2Egithub%2Ecom%2Frobsimmons%2F1172277%20%2A%2F%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%2F%2A%20Keyword%20%2A%2F%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%2F%2A%20DataType%20%2A%2F%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%2F%2A%20DecVal%20%28decimal%20values%29%20%2A%2F%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20BaseN%20%2A%2F%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20Float%20%2A%2F%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20Char%20%2A%2F%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20String%20%2A%2F%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%2F%2A%20Comment%20%2A%2F%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%2F%2A%20OtherToken%20%2A%2F%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%2F%2A%20AlertToken%20%2A%2F%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%2F%2A%20Function%20calls%20%2A%2F%20%0Acode%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%2F%2A%20ErrorTok%20%2A%2F%0A%0A" rel="stylesheet" type="text/css" />
+<link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23header%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%20code%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css" />
 
 </head>
 
@@ -51,236 +65,88 @@ code > span.er { color: #ff0000; font-weight: bold; }
 
 
 
-<div id="header">
-<h1 class="title">Vignette Title</h1>
-<h4 class="author"><em>Vignette Author</em></h4>
-<h4 class="date"><em>2016-01-02</em></h4>
+<div class="fluid-row" id="header">
+
+
+<h1 class="title">Heiser transform uses</h1>
+<h4 class="author"><em>Roel M Hogervorst</em></h4>
+<h4 class="date"><em>2016-02-23</em></h4>
+
 </div>
 
 
-<p>Vignettes are long form documentation commonly included in packages. Because they are part of the distribution of the package, they need to be as compact as possible. The <code>html_vignette</code> output type provides a custom style sheet (and tweaks some options) to ensure that the resulting html is as small as possible. The <code>html_vignette</code> format:</p>
-<ul>
-<li>Never uses retina figures</li>
-<li>Has a smaller default figure size</li>
-<li>Uses a custom CSS stylesheet instead of the default Twitter Bootstrap style</li>
-</ul>
-<div id="vignette-info" class="section level2">
-<h2>Vignette Info</h2>
-<p>Note the various macros within the <code>vignette</code> section of the metadata block above. These are required in order to instruct R how to build the vignette. Note that you should change the <code>title</code> field and the <code>\VignetteIndexEntry</code> to match the title of your vignette.</p>
-</div>
-<div id="styles" class="section level2">
-<h2>Styles</h2>
-<p>The <code>html_vignette</code> template includes a basic CSS theme. To override this theme you can specify your own CSS in the document metadata as follows:</p>
-<pre><code>output: 
-  rmarkdown::html_vignette:
-    css: mystyles.css</code></pre>
-</div>
-<div id="figures" class="section level2">
-<h2>Figures</h2>
-<p>The figure sizes have been customised so that you can easily put two images side-by-side.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(<span class="dv">1</span>:<span class="dv">10</span>)
-<span class="kw">plot</span>(<span class="dv">10</span>:<span class="dv">1</span>)</code></pre>
-<p><img src="data:image/png;base64,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" /> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASAAAAEgCAMAAAAjXV6yAAAAWlBMVEUAAAAAADoAAGYAOjoAOpAAZrY6AAA6ADo6AGY6kNtmAABmADpmZmZmtrZmtv+QOgCQZgCQkGaQ2/+2ZgC2/7a2///bkDrb/9vb////tmb/25D//7b//9v////Y4K3VAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAGd0lEQVR4nO2dDVPjNhQADQVa0pZcyZ2LSfL//2bjjwQoWGvHkq2Q3Rlu5u7EU7KRnxTrRSn2EqRY+gHkjoIABQEKAhQEKAhQEKAgQEGAggAFAQoCFAQoCFAQoCBAQYCCAAUBCgIUBCgIUBCgIEBBgIIABQEKAhQEKAhQEKAgQEGAggAFAQoCFAQoCFAQoCBAQYCCAAUBCgIUBCgIUBCgIEBBgIIABQEKAhQEKAhQEKAgQEGAggAFAQoCFAQoCFAQoCBAQYCCAAUBCgIUBCgIUBCgIEBBgIIABQEKAhQERBZUXAxLCeosxY2agCUFHX+yZkFBRYq40ZlZ0PtLW0EQTkEUzhxE4ZzFZguXDgUBCgIUBCgIyExQfvNaXoIyXBllJSjHtbWCAAUBWQkyB2E4Z7FE4dKhIEBBgIKARII2RXG/Wx9S7tPEcItn7TSCyruXg6P7/X67epwUbvl5P4mg3fqgpbp53reqzg+XwcoxiaDt6nBlVbe/9sc/36KM29H9roIcQcQpBzWqJoT7pjnIWWzGfpdGQYCCAAUBCgIuT9DM89rFCZp7ZXRpgmZfWytoUIcxG6YNp6Ahv2gOCv6ms1hWjBS0Xb3d8vp4KyxVv0szdgTt1pO8jO93aUZfYrv1/az9Ls34HFT13gR7x+Ywzl4fiqK57TqpXyZt1k6TpBs/vz93t+8nhwuSeN5PtKvxeJDUXIrTbtoPIPXKMdm2T3e7ftq2z+DHdWGCmtFTXusIOu4ml4H5fru6/fVuc2xKv4Me2KXloH091zX0LgmufBabPVw6zlgoRnij8Y0FlUW3l1wVPZvKkftdmpGC3u21981PkftdmtHv5k8r48p38180vIgRFHVaG5+DuiGUbw6KuzAaPYsdb5lNGj/pl76RV+oxGy4S7lNkBUFkBYVDL5iD5u73nNgLzmLualBDdzWoobsa1HDQrka8fpcmaZJ+feh1Oa+gCWk70U17TOWzFyBMq7eJ2bCme6OWyQiatHRMdIltV/V7tc+C4m/7DCBHQfv95ubZERSkLB4zEZRhDmp4ffgtE0HZzWIdu3X/ksl10Lzh0qEgQEGAgoArFTR8WrtOQSMWRlcpaMzSWkGD2sZsuEi4czpXULh3c1Cwe2exWCgIUBCgICCRoPJ4Mk5fuXl2gvrSdhpB5c3zfruqt2AvRVDvxJ9EUFvJuFvfvVyKoP6lY6KNw/ZW6+bupUz9aZ84zCzoVAu7uXcEfclRy3aVxdbzAObNQW/Vwr3lRLkJmnkWmz1cOhQEKAhQEKCgPrqsraAein1g7u/7hcj958xp5aigr1EQoCDCHEQ4iw1jMUEXw0KCJnTDTaIEGfuMFRS3+bkoaHo3CprcREFzBFFQhCYTmp+LgqZ3c92CLhcFAQoCFAQoCFAQoCBAQYCCAAUBCgIUBCgImEFQc1Q1H4C6CR8CWn+dB5widvocQG+MP5rKyirwxSCfSC9otz48mpKe3OFRBwVVh/9ti/x7qT8HEDxorD6Sf98eyN97KP8n0gtqz4oJfZdAzXYVFNSWaAeDtMfUbfodVu25WW2oQLuPzJWD6CUr736EBDXfBxOGBFXFY3NW9rAX7MRcgjbhB3QQEMxB1e3PFSUyvMTaw8Rb14PPFZ9JEBxTXQ/7oKCyvjrorEdMvo2VdiwPTkLzCKogRzdfZB8UdMMve/vVVaEXIltBdMx5M+rDgho1gbPBBuWWXC+xklZBZVeS0v/02+cTTNUDRkamSbocdghqcAS1H1ULvuztEw82qbKc5sNp4Y3wSrrOUu++u+HLAMNyUHYLxe76wUcEbzUqfr+yoSbd8Crzeqtx4SgIUBCgIEBBgIIABQEKAhQEKAhQEKAgQEGAggAFAQoCFAQoCFAQoCBAQYCCAAUBCgIUBCgIUBCQn6BPdQXDCw1SoCBAQUCWgrarv1dtvVldqfJPLahsS1vqwrDtaljBURwyFVQX5x9+6pqoquj+UhdH1TVUZbiQKDKZCnpsSuraqrpN9w9N/VN1+/PPWa+4TAU9NWWJp5K5Ng01vjb4qY+4ZC2oPAl6K4MN19LHJ2tB/xtBNbv1X0MLeOOQtaCupLn7h4by7t9wrWtsshbUfT6lm8XabP00vEg+CnkL+rgOOojZNOXSc6bp/ARlhoIABQEKAhQEKAhQEKAgQEGAggAFAQoCFAQoCFAQoCBAQYCCAAUBCgIUBCgIUBCgIOA/QwIfBMPupjoAAAAASUVORK5CYII=" /></p>
-<p>You can enable figure captions by <code>fig_caption: yes</code> in YAML:</p>
-<pre><code>output:
-  rmarkdown::html_vignette:
-    fig_caption: yes</code></pre>
-<p>Then you can use the chunk option <code>fig.cap = &quot;Your figure caption.&quot;</code> in <strong>knitr</strong>.</p>
-</div>
-<div id="more-examples" class="section level2">
-<h2>More Examples</h2>
-<p>You can write math expressions, e.g. <span class="math">\(Y = X\beta + \epsilon\)</span>, footnotes<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>, and tables, e.g. using <code>knitr::kable()</code>.</p>
-<table>
-<thead>
-<tr class="header">
-<th align="left"></th>
-<th align="right">mpg</th>
-<th align="right">cyl</th>
-<th align="right">disp</th>
-<th align="right">hp</th>
-<th align="right">drat</th>
-<th align="right">wt</th>
-<th align="right">qsec</th>
-<th align="right">vs</th>
-<th align="right">am</th>
-<th align="right">gear</th>
-<th align="right">carb</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">Mazda RX4</td>
-<td align="right">21.0</td>
-<td align="right">6</td>
-<td align="right">160.0</td>
-<td align="right">110</td>
-<td align="right">3.90</td>
-<td align="right">2.620</td>
-<td align="right">16.46</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">4</td>
-<td align="right">4</td>
-</tr>
-<tr class="even">
-<td align="left">Mazda RX4 Wag</td>
-<td align="right">21.0</td>
-<td align="right">6</td>
-<td align="right">160.0</td>
-<td align="right">110</td>
-<td align="right">3.90</td>
-<td align="right">2.875</td>
-<td align="right">17.02</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">4</td>
-<td align="right">4</td>
-</tr>
-<tr class="odd">
-<td align="left">Datsun 710</td>
-<td align="right">22.8</td>
-<td align="right">4</td>
-<td align="right">108.0</td>
-<td align="right">93</td>
-<td align="right">3.85</td>
-<td align="right">2.320</td>
-<td align="right">18.61</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">4</td>
-<td align="right">1</td>
-</tr>
-<tr class="even">
-<td align="left">Hornet 4 Drive</td>
-<td align="right">21.4</td>
-<td align="right">6</td>
-<td align="right">258.0</td>
-<td align="right">110</td>
-<td align="right">3.08</td>
-<td align="right">3.215</td>
-<td align="right">19.44</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="right">3</td>
-<td align="right">1</td>
-</tr>
-<tr class="odd">
-<td align="left">Hornet Sportabout</td>
-<td align="right">18.7</td>
-<td align="right">8</td>
-<td align="right">360.0</td>
-<td align="right">175</td>
-<td align="right">3.15</td>
-<td align="right">3.440</td>
-<td align="right">17.02</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">3</td>
-<td align="right">2</td>
-</tr>
-<tr class="even">
-<td align="left">Valiant</td>
-<td align="right">18.1</td>
-<td align="right">6</td>
-<td align="right">225.0</td>
-<td align="right">105</td>
-<td align="right">2.76</td>
-<td align="right">3.460</td>
-<td align="right">20.22</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="right">3</td>
-<td align="right">1</td>
-</tr>
-<tr class="odd">
-<td align="left">Duster 360</td>
-<td align="right">14.3</td>
-<td align="right">8</td>
-<td align="right">360.0</td>
-<td align="right">245</td>
-<td align="right">3.21</td>
-<td align="right">3.570</td>
-<td align="right">15.84</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">3</td>
-<td align="right">4</td>
-</tr>
-<tr class="even">
-<td align="left">Merc 240D</td>
-<td align="right">24.4</td>
-<td align="right">4</td>
-<td align="right">146.7</td>
-<td align="right">62</td>
-<td align="right">3.69</td>
-<td align="right">3.190</td>
-<td align="right">20.00</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="right">4</td>
-<td align="right">2</td>
-</tr>
-<tr class="odd">
-<td align="left">Merc 230</td>
-<td align="right">22.8</td>
-<td align="right">4</td>
-<td align="right">140.8</td>
-<td align="right">95</td>
-<td align="right">3.92</td>
-<td align="right">3.150</td>
-<td align="right">22.90</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="right">4</td>
-<td align="right">2</td>
-</tr>
-<tr class="even">
-<td align="left">Merc 280</td>
-<td align="right">19.2</td>
-<td align="right">6</td>
-<td align="right">167.6</td>
-<td align="right">123</td>
-<td align="right">3.92</td>
-<td align="right">3.440</td>
-<td align="right">18.30</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="right">4</td>
-<td align="right">4</td>
-</tr>
-</tbody>
-</table>
-<p>Also a quote using <code>&gt;</code>:</p>
-<blockquote>
-<p>“He who gives up [code] safety for [code] speed deserves neither.” (<a href="https://twitter.com/hadleywickham/status/504368538874703872">via</a>)</p>
-</blockquote>
-</div>
-<div id="example" class="section level2">
-<h2>example</h2>
-<p>some text</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># library(heisertransform)</span>
-<span class="co"># test&lt;-data.frame(</span>
-<span class="co">#         c(.80,.85,.56,.52,.52,.50,.48,.48,.44,.15,.20),</span>
-<span class="co">#         c(.19,.12,.22,.23,.24,.25,.26,.27,.28,.63,.06),</span>
-<span class="co">#         c(.01,.03,.22,.25,.24,.25,.26,.25,.28,.22,.74)</span>
-<span class="co"># )</span>
-<span class="co"># names(test)&lt;- c(&quot;test1&quot;, &quot;test2&quot;,&quot;test3&quot;)</span>
-<span class="co"># #tests voor dataset</span>
-<span class="co"># test$cat&lt;-c(&quot;test1&quot;,&quot;test1&quot;,&quot;middel&quot;,&quot;middel&quot;,&quot;middel&quot;,&quot;middel&quot;,&quot;middel&quot;,&quot;middel&quot;,&quot;middel&quot;,&quot;test2&quot;,&quot;test3&quot;)</span>
-<span class="co"># </span>
-<span class="co"># coord&lt;- Heisertransform2Coordinates(test, 1,2,3)</span>
-<span class="co"># # coord2&lt;- Heisertransform2Coordinates(test, 1,2,3, T )</span>
-<span class="co"># # coord2$cat&lt;-as.factor(coord2$cat)</span>
-<span class="co"># vert&lt;- CreateVertices(test, 1,2,3, F)</span>
-<span class="co"># plot(vert)</span>
-<span class="co"># points(coord)</span></code></pre>
-</div>
-<div class="footnotes">
-<hr />
-<ol>
-<li id="fn1"><p>A footnote here.<a href="#fnref1">↩</a></p></li>
-</ol>
-</div>
+<p>Here is some exampledata</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(heisertransform)
+testdata</code></pre></div>
+<pre><code>##    test1 test2 test3    cat
+## 1   0.80  0.19  0.01  test1
+## 2   0.85  0.12  0.03  test1
+## 3   0.56  0.22  0.22 middel
+## 4   0.52  0.23  0.25 middel
+## 5   0.52  0.24  0.24 middel
+## 6   0.50  0.25  0.25 middel
+## 7   0.48  0.26  0.26 middel
+## 8   0.48  0.27  0.25 middel
+## 9   0.44  0.28  0.28 middel
+## 10  0.15  0.63  0.22  test2
+## 11  0.20  0.06  0.74  test3</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(heisertransform)
+temp&lt;-<span class="kw">CreateVertices</span>(testdata, <span class="st">&quot;test1&quot;</span>, <span class="st">&quot;test2&quot;</span>,<span class="st">&quot;test3&quot;</span>,<span class="dt">verticeName =</span> F)
+<span class="kw">plot</span>(temp, <span class="dt">main =</span> <span class="st">&quot;Endresult of heisertransform&quot;</span>, <span class="dt">pch =</span> <span class="dv">17</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)
+<span class="kw">points</span>(<span class="kw">Prob2Coord</span>(testdata, <span class="st">&quot;test1&quot;</span>, <span class="st">&quot;test2&quot;</span>,<span class="st">&quot;test3&quot;</span>), <span class="dt">col=</span> <span class="st">&quot;darkgreen&quot;</span>, <span class="dt">pch =</span> <span class="dv">19</span>)
+<span class="kw">segments</span>(<span class="dt">x0 =</span> temp[<span class="dv">1</span>,<span class="dv">1</span>], <span class="dt">y0 =</span> temp[<span class="dv">1</span>,<span class="dv">2</span>], <span class="dt">x1 =</span>temp[<span class="dv">2</span>,<span class="dv">1</span>], <span class="dt">y1 =</span> temp[<span class="dv">2</span>,<span class="dv">2</span>])
+<span class="kw">segments</span>(<span class="dt">x0 =</span> temp[<span class="dv">2</span>,<span class="dv">1</span>], <span class="dt">y0 =</span> temp[<span class="dv">2</span>,<span class="dv">2</span>], <span class="dt">x1 =</span>temp[<span class="dv">3</span>,<span class="dv">1</span>], <span class="dt">y1 =</span> temp[<span class="dv">3</span>,<span class="dv">2</span>])
+<span class="kw">segments</span>(<span class="dt">x0 =</span> temp[<span class="dv">3</span>,<span class="dv">1</span>], <span class="dt">y0 =</span> temp[<span class="dv">3</span>,<span class="dv">2</span>], <span class="dt">x1 =</span>temp[<span class="dv">1</span>,<span class="dv">1</span>], <span class="dt">y1 =</span> temp[<span class="dv">1</span>,<span class="dv">2</span>])</code></pre></div>
+<p><img src="data:image/png;base64,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" /></p>
+<p>First a simple plot of the vertices and points.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
+vert&lt;-<span class="st"> </span><span class="kw">CreateVertices</span>(testdata, <span class="st">&quot;test1&quot;</span>, <span class="st">&quot;test2&quot;</span>,<span class="st">&quot;test3&quot;</span>,<span class="dt">verticeName =</span> T)
+points&lt;-<span class="kw">Prob2Coord</span>(testdata, <span class="st">&quot;test1&quot;</span>, <span class="st">&quot;test2&quot;</span>,<span class="st">&quot;test3&quot;</span>, <span class="dt">append =</span> T)
+<span class="kw">ggplot</span>(<span class="dt">data =</span> vert, <span class="kw">aes</span>(x,y))+<span class="kw">geom_point</span>( <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>) +<span class="st"> </span>
+<span class="st">        </span><span class="kw">geom_point</span>(<span class="dt">data =</span> points, <span class="kw">aes</span>(x,y), <span class="dt">colour =</span> <span class="st">&quot;darkgreen&quot;</span>)</code></pre></div>
+<p><img src="data:image/png;base64,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" /></p>
+<p>The same plot but with other colours.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> vert, <span class="kw">aes</span>(x,y))+<span class="kw">geom_point</span>( <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>) +<span class="st"> </span>
+<span class="st">        </span><span class="kw">geom_point</span>(<span class="dt">data =</span><span class="kw">Prob2Coord</span>(testdata, <span class="st">&quot;test1&quot;</span>, <span class="st">&quot;test2&quot;</span>,<span class="st">&quot;test3&quot;</span>, <span class="dt">append =</span> T), <span class="kw">aes</span>(x,y, <span class="dt">colour =</span> cat))+
+<span class="st">        </span><span class="kw">geom_line</span>(<span class="dt">data =</span> vert, <span class="kw">aes</span>(x,y))+
+<span class="st">        </span><span class="kw">geom_segment</span>(<span class="dt">data =</span> vert, <span class="kw">aes</span>(<span class="dt">x =</span> x[<span class="dv">1</span>], <span class="dt">xend =</span> x[<span class="dv">3</span>], <span class="dt">y=</span> y[<span class="dv">1</span>], <span class="dt">yend=</span> y[<span class="dv">3</span>]))</code></pre></div>
+<p><img src="data:image/png;base64,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" /></p>
+<p>Things look better when you put them into functions or lists. All ggplot parts are lists, so for example.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lines&lt;-<span class="kw">list</span>(<span class="kw">geom_line</span>(<span class="dt">data =</span> vert, <span class="kw">aes</span>(x,y), <span class="dt">colour =</span> <span class="st">&quot;#122b3e&quot;</span>),
+              <span class="kw">geom_segment</span>(<span class="dt">data =</span> vert, <span class="kw">aes</span>(<span class="dt">x =</span> x[<span class="dv">1</span>], <span class="dt">xend =</span> x[<span class="dv">3</span>], <span class="dt">y=</span> y[<span class="dv">1</span>], <span class="dt">yend=</span> y[<span class="dv">3</span>]), <span class="dt">colour =</span> <span class="st">&quot;#122b3e&quot;</span> ))
+ points&lt;-<span class="kw">list</span>(<span class="kw">geom_point</span>(<span class="dt">data =</span> vert[<span class="dv">1</span>,], <span class="kw">aes</span>(x, y),  <span class="dt">shape =</span> <span class="dv">17</span>,  <span class="dt">size =</span> <span class="dv">5</span>, <span class="dt">colour =</span> <span class="st">&quot;#cc0000&quot;</span>),
+              <span class="kw">geom_point</span>(<span class="dt">data =</span> vert[<span class="dv">2</span>,], <span class="kw">aes</span>(x, y),  <span class="dt">shape =</span> <span class="dv">17</span>,  <span class="dt">size =</span> <span class="dv">5</span>, <span class="dt">stroke =</span> <span class="dv">2</span>, <span class="dt">colour =</span> <span class="st">&quot;#ffca00&quot;</span>),
+              <span class="kw">geom_point</span>(<span class="dt">data =</span> vert[<span class="dv">3</span>,], <span class="kw">aes</span>(x, y),  <span class="dt">shape =</span> <span class="dv">17</span>,  <span class="dt">size =</span> <span class="dv">5</span>, <span class="dt">stroke =</span> <span class="dv">2</span>, <span class="dt">colour =</span> <span class="st">&quot;#00b300&quot;</span>)
+ )
+ 
+  text&lt;-<span class="st"> </span><span class="kw">list</span>(<span class="kw">geom_text</span>(<span class="dt">data =</span> vert[<span class="dv">1</span>,], <span class="kw">aes</span>(x,y, <span class="dt">label =</span> <span class="st">&quot;left&quot;</span>), <span class="dt">vjust =</span><span class="fl">1.5</span>, <span class="dt">hjust =</span> <span class="dv">0</span>, <span class="dt">colour =</span> <span class="st">&quot;#cc0000&quot;</span>) ,
+               <span class="kw">geom_text</span>(<span class="dt">data =</span> vert[<span class="dv">2</span>,], <span class="kw">aes</span>(x,y, <span class="dt">label =</span> <span class="st">&quot;top&quot;</span>), <span class="dt">vjust =</span><span class="dv">0</span>, <span class="dt">hjust =</span> <span class="fl">1.5</span>, <span class="dt">colour =</span> <span class="st">&quot;#ffca00&quot;</span>) ,
+               <span class="kw">geom_text</span>(<span class="dt">data =</span> vert[<span class="dv">3</span>,], <span class="kw">aes</span>(x,y, <span class="dt">label =</span> <span class="st">&quot;right&quot;</span>), <span class="dt">vjust =</span><span class="fl">1.5</span>, <span class="dt">hjust =</span> <span class="dv">1</span>, <span class="dt">colour =</span> <span class="st">&quot;#00b300&quot;</span>)
+  )
+  g&lt;-<span class="kw">ggplot</span>() +lines +points +<span class="st"> </span>text
+  g</code></pre></div>
+<p><img src="data:image/png;base64,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" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  g+<span class="kw">geom_point</span>(<span class="dt">data =</span><span class="kw">Prob2Coord</span>(testdata, <span class="st">&quot;test1&quot;</span>, <span class="st">&quot;test2&quot;</span>,<span class="st">&quot;test3&quot;</span>, <span class="dt">append =</span> T), <span class="kw">aes</span>(x,y, <span class="dt">colour =</span> cat))</code></pre></div>
+<p><img src="data:image/png;base64,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" /></p>
+<p>The default ggplot theme is distracting, the axes are not really what matters here. The minimal theme is somewhat better, but it’s even better to get rid of all the axis. It quite easy to create a new theme</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">g+<span class="st">  </span><span class="kw">theme_minimal</span>()</code></pre></div>
+<p><img src="data:image/png;base64,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" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"> <span class="co">#creating a new theme</span>
+ theme_heiser&lt;-<span class="kw">theme_grey</span>() +<span class="st"> </span><span class="kw">theme</span>(<span class="dt">axis.line=</span><span class="kw">element_blank</span>(),
+                                    <span class="dt">axis.text.x=</span><span class="kw">element_blank</span>(),
+                                    <span class="dt">axis.text.y=</span><span class="kw">element_blank</span>(),
+                                    <span class="dt">axis.ticks=</span><span class="kw">element_blank</span>(),
+                                    <span class="dt">axis.title.x=</span><span class="kw">element_blank</span>(),
+                                    <span class="dt">axis.title.y=</span><span class="kw">element_blank</span>(),
+                                    <span class="dt">legend.position=</span><span class="st">&quot;bottom&quot;</span>,
+                                    <span class="dt">panel.background=</span><span class="kw">element_blank</span>(),
+                                    <span class="dt">panel.border=</span><span class="kw">element_blank</span>(),
+                                    <span class="dt">panel.grid.major=</span><span class="kw">element_blank</span>(),
+                                    <span class="dt">panel.grid.minor=</span><span class="kw">element_blank</span>(),
+                                    <span class="dt">plot.background=</span><span class="kw">element_blank</span>())
+g+<span class="kw">geom_point</span>(<span class="dt">data =</span><span class="kw">Prob2Coord</span>(testdata, <span class="st">&quot;test1&quot;</span>, <span class="st">&quot;test2&quot;</span>,<span class="st">&quot;test3&quot;</span>, <span class="dt">append =</span> T), <span class="kw">aes</span>(x,y, <span class="dt">colour =</span> cat)) +
+<span class="st">          </span>theme_heiser</code></pre></div>
+<p><img src="data:image/png;base64,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" /></p>
 
 
 

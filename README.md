@@ -15,6 +15,8 @@ You have created probabilties for three groups from your multinomial, but visual
 
 \[example in one plot\]
 
+\[animation\]{animation.gif}
+
 To install
 ----------
 
