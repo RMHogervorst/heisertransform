@@ -66,7 +66,15 @@ Theory
 
 
 ## visual display in base plot
-
+```{r}
+library(heisertransform)
+temp<-CreateVertices(testdata, "test1", "test2","test3",verticeName = F)
+plot(temp, main = "Endresult of heisertransform", pch = 17, col = "red")
+points(Prob2Coord(testdata, "test1", "test2","test3"), col= "darkgreen", pch = 19)
+segments(x0 = temp[1,1], y0 = temp[1,2], x1 =temp[2,1], y1 = temp[2,2])
+segments(x0 = temp[2,1], y0 = temp[2,2], x1 =temp[3,1], y1 = temp[3,2])
+segments(x0 = temp[3,1], y0 = temp[3,2], x1 =temp[1,1], y1 = temp[1,2])
+```
 
 ## visual display in ggplot2
 We've added a theme that you can use in ggplot (it empties the entire area)
