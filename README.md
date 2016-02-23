@@ -15,8 +15,6 @@ You have created probabilties for three groups from your multinomial, but visual
 
 \[example in one plot\]
 
-<img src="NOTINPACKAGE/files/triangle_movement.gif" height="400px" width="400px" />
-
 To install
 ----------
 
@@ -48,7 +46,7 @@ Background
 
 Theory
 
-\[this needs to display how shapes change with different probabilities\]
+<img src="NOTINPACKAGE/files/triangle_movement.gif" height="400px" width="400px" />
 
 visual display in base plot
 ---------------------------
