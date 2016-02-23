@@ -29,9 +29,15 @@ test_that("rowsums larger or smaller than 1 are failing", {
         expect_error(CreateVertices(errorset,"var1", "var2", "vartoomuch", verticeName = T),regexp = "column means are not equal to 1" )
         expect_error(CreateVertices(errorset,"var1", "var2", "vartoolittle", verticeName = T),regexp = "column means are not equal to 1" )
 })
+# test_that("invalid types are NOT accepted",
+#           {
+#                 expect_error()
+#                   # test met en zonder df,
+#           })
 
-#stop("row sums are not identical")
-
+test_that("valid types ARE accepted by inputchecks", {
+        expect_silent(inputchecks(iris, "Sepal.Length", "Sepal.Width",  "Petal.Length"))
+})
 
 #test_that("")
 # library(testthat)

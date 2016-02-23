@@ -2,7 +2,6 @@ context("general functioning of functions")
 #source("R/heisertransformfunctions.R")
 #
 
-
 test_that("output verticeName = T or F are identical",{
         data("testdata")
         a<-CreateVertices(testdata, "test1", "test2","test3",verticeName = F)
@@ -22,4 +21,9 @@ test_that("check_and_fix_num works",{
         class(check_and_fix_num(rnorm(7)))=="numeric"
         class(check_and_fix_num(as.character(rnorm(7))))=="numeric"
 
+})
+test_that("CreateVertices creates a dataframe of 3 by 3", {
+        #CreateVertices(var_left =  errorset$var1, var_top= errorset$var2, var_right= errorset$var3)[4,]
+        expect_equal(dim(CreateVertices(testdata, "test1", "test2","test3",verticeName = F))[1], 3)
+        expect_equal(dim(CreateVertices(testdata, "test1", "test2","test3",verticeName = T))[1], 3)
 })
