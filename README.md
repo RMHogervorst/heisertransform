@@ -1,5 +1,7 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-last change "2016-02-23"
+last change 2016-03-02
+
+Buildstatus: [![Build Status](https://travis-ci.org/RMHogervorst/heisertransform.svg?branch=master)](https://travis-ci.org/RMHogervorst/heisertransform)
 
 Introduction - Quick start
 ==========================
