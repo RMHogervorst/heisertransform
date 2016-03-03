@@ -21,4 +21,12 @@
 #' @docType package
 #' @name heisertransform
 NULL
-#> NULL
+
+#' testdata.
+#'
+#' Full baby name data provided by the SSA. This includes all names with at
+#' least 5 uses.
+#'
+#' @format  A data frame with 11 observations on the following 4 variables. \code{test1}, \code{test2},
+#'   \code{test3}, \code{cat}
+"testdata"

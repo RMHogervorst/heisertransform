@@ -17,15 +17,15 @@ CreateVertices(testdata, "test1", "test2","test3")
 
 ## ------------------------------------------------------------------------
 library(heisertransform)
-temp<-CreateVertices(testdata, "test1", "test2","test3",verticeName = F)
+temp<-CreateVertices(testdata, "test1", "test2","test3",verticeName = FALSE)
 plot(temp, main = "Triangle points", pch = 17, col = "red")
 
 ## ------------------------------------------------------------------------
-Prob2Coord(testdata, "test1", "test2","test3", append = T)
+Prob2Coord(testdata, "test1", "test2","test3", append = TRUE)
 
 ## ------------------------------------------------------------------------
 library(heisertransform)
-temp<-CreateVertices(testdata, "test1", "test2","test3",verticeName = F)
+temp<-CreateVertices(testdata, "test1", "test2","test3",verticeName = FALSE)
 plot(temp, main = "Triangle, points, lines", pch = 17, col = "red")
 points(Prob2Coord(testdata, "test1", "test2","test3"), col= "darkgreen", pch = 4)
 segments(x0 = temp[1,1], y0 = temp[1,2], x1 =temp[2,1], y1 = temp[2,2])
@@ -34,14 +34,14 @@ segments(x0 = temp[3,1], y0 = temp[3,2], x1 =temp[1,1], y1 = temp[1,2])
 
 ## ------------------------------------------------------------------------
 library(ggplot2)
-vert<- CreateVertices(testdata, "test1", "test2","test3",verticeName = T)
-points<-Prob2Coord(testdata, "test1", "test2","test3", append = T)
+vert<- CreateVertices(testdata, "test1", "test2","test3",verticeName = TRUE)
+points<-Prob2Coord(testdata, "test1", "test2","test3", append = TRUE)
 ggplot(data = vert, aes(x,y))+geom_point( color = "red") + 
         geom_point(data = points, aes(x,y), colour = "darkgreen")
 
 ## ------------------------------------------------------------------------
 ggplot(data = vert, aes(x,y))+geom_point( color = "red") + 
-        geom_point(data =Prob2Coord(testdata, "test1", "test2","test3", append = T), aes(x,y, colour = cat))+
+        geom_point(data =Prob2Coord(testdata, "test1", "test2","test3", append = TRUE), aes(x,y, colour = cat))+
         geom_line(data = vert, aes(x,y))+
         geom_segment(data = vert, aes(x = x[1], xend = x[3], y= y[1], yend= y[3]))
 
@@ -61,7 +61,7 @@ text<- list(geom_text(data = vert[1,], aes(x,y, label = "left"), vjust =1.5, hju
 ## ------------------------------------------------------------------------
 g<-ggplot() +lines +corners + text
 g
-g+geom_point(data =Prob2Coord(testdata, "test1", "test2","test3", append = T), aes(x,y, colour = cat))
+g+geom_point(data =Prob2Coord(testdata, "test1", "test2","test3", append = TRUE), aes(x,y, colour = cat))
 
 ## ------------------------------------------------------------------------
 g+  theme_minimal()

@@ -4,7 +4,7 @@
 \alias{CreateVertices}
 \title{CreateVertices Transforms categorical probabilities into vertices with x.y coordinates.}
 \usage{
-CreateVertices(df, var_left, var_top, var_right, verticeName = T)
+CreateVertices(df, var_left, var_top, var_right, verticeName = TRUE)
 }
 \arguments{
 \item{df}{The data frame where variables can be found.}

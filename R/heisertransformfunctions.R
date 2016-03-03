@@ -31,7 +31,7 @@
 #' }
 #' @family Heiser transform functions
 #' @export
-CreateVertices <- function(df, var_left, var_top, var_right, verticeName = T) {
+CreateVertices <- function(df, var_left, var_top, var_right, verticeName = TRUE) {
         inputchecks(df,var_left, var_top, var_right)
         #assigning variables
         varLeft <- df[, var_left]

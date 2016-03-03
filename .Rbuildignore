@@ -5,3 +5,4 @@
 Todo.txt
 ^NOTINPACKAGE$
 ^animation\.gif$
+^\.travis\.yml$

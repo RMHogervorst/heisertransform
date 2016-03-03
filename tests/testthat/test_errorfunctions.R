@@ -12,7 +12,7 @@ varcharacter<-as.character(var3)
 vartoomuch<-var2*2  # will be more than 1.
 vartoolittle<-var1*.5 # will be less than 1
 varNA<-var3
-varNA[which(varNA %in% sample(varNA, 3, replace = T))]<-NA
+varNA[which(varNA %in% sample(varNA, 3, replace = TRUE))]<-NA
 errorset<-data.frame(var1, var2, var3, varfactor, varcharacter, vartoomuch, vartoolittle, varNA)
 rm(n,delete, var1, var2, var3, varfactor, varcharacter, vartoomuch,vartoolittle, varNA)
 
@@ -26,8 +26,8 @@ test_that("verticeName error works", {
         expect_error(CreateVertices(errorset,"var1", "var2", "var3", verticeName = "name"), regexp = "verticeName needs to be TRUE or FALSE")
 })
 test_that("rowsums larger or smaller than 1 are failing", {
-        expect_error(CreateVertices(errorset,"var1", "var2", "vartoomuch", verticeName = T),regexp = "column means are not equal to 1" )
-        expect_error(CreateVertices(errorset,"var1", "var2", "vartoolittle", verticeName = T),regexp = "column means are not equal to 1" )
+        expect_error(CreateVertices(errorset,"var1", "var2", "vartoomuch", verticeName = TRUE),regexp = "column means are not equal to 1" )
+        expect_error(CreateVertices(errorset,"var1", "var2", "vartoolittle", verticeName = TRUE),regexp = "column means are not equal to 1" )
 })
 test_that("invalid input gives error",{
         expect_error(CreateVertices(testdata, test1, "test2", "test3" ))
