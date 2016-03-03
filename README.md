@@ -55,7 +55,7 @@ Visual display in base plot
 
 ``` r
 library(heisertransform)
-temp<-CreateVertices(testdata, "test1", "test2","test3",verticeName = F)
+temp<-CreateVertices(testdata, "test1", "test2","test3",verticeName = FALSE)
 plot(temp, main = "Endresult of heisertransform", pch = 17, col = "red")
 points(Prob2Coord(testdata, "test1", "test2","test3"), col= "darkgreen", pch = 19)
 segments(x0 = temp[1,1], y0 = temp[1,2], x1 =temp[2,1], y1 = temp[2,2])
@@ -76,7 +76,7 @@ ggplot elements are lists. So you can create lists that will be applied to your 
 # plot with ggplot
 library(ggplot2)
 lines<- function(vert, x, y, line_colour){
-return(list(geom_segment(data = vert, aes(x = x[1], xend = x[3], y= y[1], yend= y[3]), colour = line_colour ), #left 2 right
+        return(list(geom_segment(data = vert, aes(x = x[1], xend = x[3], y= y[1], yend= y[3]), colour = line_colour ),
      geom_segment(data = vert, aes(x = x[1], xend = x[2], y= y[1], yend= y[2]), colour = line_colour ), #left to up
      geom_segment(data = vert, aes(x = x[2], xend = x[3], y= y[2], yend= y[3]), colour = line_colour )) )#right to up
 }
@@ -88,13 +88,11 @@ corners<-function(vert, x, y, colour_left = "#cc0000", colour_top = "#ffca00", c
              geom_point(data = vert[3,], aes(x, y),  shape = shape,  size = size, stroke = stroke, colour = colour_right)
 ))}
 
-text<- list(geom_text(data = vert[1,], aes(x,y, label = "left"), vjust =1.5, hjust = 0, colour = "#cc0000") ,
-                     geom_text(data = vert[2,], aes(x,y, label = "top"), vjust =0, hjust = 1.5, colour = "#ffca00") ,
-                     geom_text(data = vert[3,], aes(x,y, label = "right"), vjust =1.5, hjust = 1, colour = "#00b300")
-        )
 
 points<-Prob2Coord(testdata, "test1", "test2","test3", append = T)
-g<-ggplot() +lines(vert, x, y,"blue" )+ corners(vert, x, y, size = 5) + geom_point(data =points, aes(x,y, colour = cat)) + theme_minimal()
+g<-ggplot() +lines(temp, x, y,"blue" )+ corners(temp, x, y, size = 5) + geom_point(data =points, aes(x,y, colour = cat)) + theme_minimal()
 #makes blue lines, standard colours of the vertices.
-g+ text   # displays plot with texts as well.
+print(g)
 ```
+
+![](README-example%20lines%20points%20texts-1.png)<!-- -->
