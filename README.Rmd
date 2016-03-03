@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 
 last change `r Sys.Date()`
 
-Buildstatus: [![Build Status](https://travis-ci.org/RMHogervorst/heisertransform.svg?branch=master)](https://travis-ci.org/RMHogervorst/heisertransform)
+Buildstatus: [![Build Status](https://travis-ci.org/RMHogervorst/heisertransform.svg?branch=develop)](https://travis-ci.org/RMHogervorst/heisertransform)
 
 # Introduction - Quick start
 This package helps in visualizing probability information for 3 predicted classes.
