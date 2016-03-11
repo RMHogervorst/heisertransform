@@ -1,21 +1,40 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-last change 2016-03-03
+last change 2016-03-11
 
 Buildstatus: [![Build Status](https://travis-ci.org/RMHogervorst/heisertransform.svg?branch=develop)](https://travis-ci.org/RMHogervorst/heisertransform)
+
+[![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
 
 Introduction - Quick start
 ==========================
 
-This package helps in visualizing probability information for 3 predicted classes. For instance with multinomial regression. It visualizes probability information from 3 classes into a 2 dimensional space. \[example\]
+This package helps in visualizing probability information for 3 predicted classes. For instance with multinomial regression. It visualizes probability information from 3 classes into a 2 dimensional space.
 
 Use case:
 =========
 
 You have created probabilties for three groups from your multinomial, but visualizing this information is often difficult.
 
-\[table view of three probabilties\]
+``` r
+library(heisertransform)
+testdata
+#>    test1 test2 test3    cat
+#> 1   0.80  0.19  0.01  test1
+#> 2   0.85  0.12  0.03  test1
+#> 3   0.56  0.22  0.22 middel
+#> 4   0.52  0.23  0.25 middel
+#> 5   0.52  0.24  0.24 middel
+#> 6   0.50  0.25  0.25 middel
+#> 7   0.48  0.26  0.26 middel
+#> 8   0.48  0.27  0.25 middel
+#> 9   0.44  0.28  0.28 middel
+#> 10  0.15  0.63  0.22  test2
+#> 11  0.20  0.06  0.74  test3
+```
 
-\[example in one plot\]
+example in one plot
+
+![](README-example%20lines%20points%20texts-1.png)
 
 To install
 ----------
@@ -63,7 +82,7 @@ segments(x0 = temp[2,1], y0 = temp[2,2], x1 =temp[3,1], y1 = temp[3,2])
 segments(x0 = temp[3,1], y0 = temp[3,2], x1 =temp[1,1], y1 = temp[1,2])
 ```
 
-![](README-unnamed-chunk-2-1.png)<!-- -->
+![](README-unnamed-chunk-3-1.png)<!-- -->
 
 Advanced visual display in ggplot2
 ----------------------------------
