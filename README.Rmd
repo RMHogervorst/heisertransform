@@ -17,6 +17,7 @@ knitr::opts_chunk$set(
 last change `r Sys.Date()`
 
 Buildstatus: [![Build Status](https://travis-ci.org/RMHogervorst/heisertransform.svg?branch=develop)](https://travis-ci.org/RMHogervorst/heisertransform)
+
 [![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
 
 
@@ -24,17 +25,20 @@ Buildstatus: [![Build Status](https://travis-ci.org/RMHogervorst/heisertransform
 This package helps in visualizing probability information for 3 predicted classes.
 For instance with multinomial regression. 
 It visualizes probability information from 3 classes into a 2 dimensional space.
-[example]
+
 
 # Use case:
 You have created probabilties for three groups from your multinomial, 
 but visualizing this information is often difficult.
 
-[table view of three probabilties]
+```{r }
+library(heisertransform)
+testdata
+```
 
-[example in one plot]
+example in one plot
 
-
+![](README-example lines points texts-1.PNG)
 
 ## To install
 In the future this package will be on CRAN. 
