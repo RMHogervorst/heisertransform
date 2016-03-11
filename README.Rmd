@@ -34,11 +34,12 @@ but visualizing this information is often difficult.
 ```{r }
 library(heisertransform)
 testdata
+
 ```
 
 example in one plot
 
-![](README-example lines points texts-1.PNG)
+![](README-example lines points texts-1.png)
 
 ## To install
 In the future this package will be on CRAN. 

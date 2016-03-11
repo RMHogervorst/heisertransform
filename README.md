@@ -34,7 +34,7 @@ testdata
 
 example in one plot
 
-![](README-example%20lines%20points%20texts-1.PNG)
+![](README-example%20lines%20points%20texts-1.png)
 
 To install
 ----------
