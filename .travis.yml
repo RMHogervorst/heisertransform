@@ -1,6 +1,10 @@
 language: r
 cache: packages
 
+os:
+ - linux
+ - osx
+
 after_script:
-  - ./travis-tool.sh dump_logs_by_extension "timings"
-  - ./travis-tool.sh dump_sysinfo
+ - ./travis-tool.sh dump_logs_by_extension "timings"
+ - ./travis-tool.sh dump_sysinfo
