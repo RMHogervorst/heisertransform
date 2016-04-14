@@ -1,7 +1,7 @@
 Package: heisertransform
 Type: Package
 Title: Transforms 3 Categorical Probabilities Into X,Y Coordinates
-Version: 0.1.0
+Version: 0.1.9000
 Date: 2016-01-02
 Authors@R: c( person("Roel", "Hogervorst", email = "hogervorst.rm@gmail.com", role = c("aut", "cre")),person("Vincent", "Buurman", role = c("aut")), person("Willem", "Heiser", role=c("exp", "inv")))
 Description: Based on Heiser 2004, this package transforms 3 categories of f.i.
