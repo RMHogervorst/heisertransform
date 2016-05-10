@@ -1,0 +1,18 @@
+citHeader("To cite the Heisertransform package in publications use:")
+
+citEntry(entry = "Article",
+  title        = "Geometric representation of association between categories",
+  author       = personList(as.person("Heiser, Willem J."),
+  journal      = "Psychometrika",
+  year         = "2004",
+  volume       = "69",
+  number       = "4",
+  pages        = "513-545",
+  url          = "http://dx.doi.org/10.1007/BF02289854",
+
+  textVersion  =
+  paste("Willem J. Heiser (2004).",
+        "Geometric representation of association between categories.",
+        "Psychometrika, 69(4), 513-545.",
+        "URL http://dx.doi.org/10.1007/BF02289854.")
+)

@@ -74,6 +74,3 @@ errorfactor<-Prob2Coord(errorset, "var1", "var2", "varfactor") # geeft error col
 errorcharacter<-Prob2Coord(errorset, "var1", "varcharacter", "var3") # geeft error column means are not equal
 errortoomuch<- Prob2Coord(errorset, "var1", "var2", "vartoomuch")# geeft error column means are not equal
 errorNA<-Prob2Coord(errorset, "var1", "var2", "varNA") # error missing value where true false needed.
-vert_correct<-CreateVertices(errorset, "var1", "var2", "var3")
-
-
