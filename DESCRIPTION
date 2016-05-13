@@ -21,29 +21,8 @@ Description: An implementation of heiser (2004) that helps to visually display
         of your choice. For background information, the method and higher
         dimensional generalizations: Geometric representation of association
         between categories, 2004 , Psychometrika VOL. 69, NO. 4, 513-545.
-
-
-
-Based on Heiser 2004, this package transforms probability to belong to
-    one of 3 categories, as is a result from multinomial regression,
-    into points in a 2d space. Probabilities of every row (case) are
-    than transformed into xy coordinates so that points are arranged in proportion
-    to probability.
-    When plotted the points are in a triangle that represents the
-    3 categories and the distance towards the points of the triangle represent
-    probability of belonging to this cluster.
-    Each sample  is  located  at  a  centroid  (barycenter,
-    center of gravity)  of the three  vertices,  weighted by the relative
-    frequency of each  category in  that  sample, and each individual point is
-    in turn located at the centroid of its  constituent samples,  weighted by
-    their sample sizes.  Thus, we can read off the strength of association
-    between countries and attachment categories from the triangular diagram by
-    assessing their relative position towards the vertices in the plot.
-    This triangle approach is distinct
-    from other triangle approaches such as terniary plots, trilinear or triplots
-    where every side of the triangle displays a dimension. This contrasts with
-    the heisertransformation which is truely two dimensional and euclidian.
-
+URL: https://github.com/RMHogervorst/heisertransform
+BugReports: https://github.com/RMHogervorst/heisertransform/issues
 Depends:
     R (>= 3.0.1),
 License: file LICENSE
