@@ -22,22 +22,81 @@ Buildstatus: [![Build Status](https://travis-ci.org/RMHogervorst/heisertransform
 
 
 # Introduction - Quick start
+An implementation of heiser (2004) that helps to visually display
+relative probabilities to categorical assignment. Vertices,
+representing the relative frequency of the categories, form the corners
+of a triangle. Individual points in the triangle have a relative
+position based on strength of association towards the vertices
+(category). Thus points closer to a vertice have a larger probability
+towards that category. 
+
+This triangle approach is distinct from other
+triangle plots known as terniary plots, trilinear diagrams or
+triplots where every side of the triangle displays a dimension,
+effectively creating a triangular coordinate system.
+In our approach the relative probabilities are transformed to an
+euclidian 2-dimensional space, making direct distance comparisons
+possible. 
+
+This package creates the vertices and coordinates for three
+categorical probabilities that can be plotted with the plotting system
+of your choice. For background information, the method and higher
+dimensional generalizations: Geometric representation of association
+between categories, 2004 , Psychometrika VOL. 69, NO. 4, 513-545.
+
+
 This package helps in visualizing probability information for 3 predicted classes.
 For instance with multinomial regression. 
 It visualizes probability information from 3 classes into a 2 dimensional space.
 
 
 # Use case:
-You have created probabilties for three groups from your multinomial, 
-but visualizing this information is often difficult.
+You have created probabilties for three groups and would like to visualize this
+information into one display. example:
 
-```{r }
-library(heisertransform)
-testdata
+```{r create testset, echo=FALSE}
+#new testset
+n <-25
+var1 <- rnorm(n, mean = .60, sd = .14)
+var2<- rnorm(n, .10, 0.15)
+delete<-var1+var2 >1
+var1<-var1[!delete]
+var2<-var2[!delete]
+var3<- 1-(var1+var2)
+example_data <- data.frame(var1, var2, var3)
 
+example_data <-rbind( example_data , setNames( rev(example_data) , names( example_data ) ) )
+# van een paar punten 3 en 2 omwisselen
+replaceindex <-example_data$var1 %in% sample(example_data$var1, 20, replace = FALSE)
+example_data$var4[replaceindex]<- example_data$var2[replaceindex]
+example_data$var4[!replaceindex]<- example_data$var3[!replaceindex]
+example_data$var5[!replaceindex]<- example_data$var2[!replaceindex]
+example_data$var5[replaceindex]<- example_data$var3[replaceindex]
+example_data$var2 <-NULL
+example_data$var3 <-NULL
+names(example_data) <- c("prob1", "prob2", "prob3")
+#example_data[rowSums(example_data <0)]
+deleterow <- c(
+        as.numeric(row.names(example_data[example_data$prob2<0,])),
+        as.numeric(row.names(example_data[example_data$prob3<0,]))     
+)
+example_data <-example_data[-deleterow,]
+
+print(example_data)
 ```
 
 example in one plot
+
+```{r display of variables}
+library(heisertransform)
+coordinates <- Prob2Coord(example_data, "prob1", "prob2", "prob3")
+library(ggplot2)
+ggplot(data = coordinates, aes(x,y)) + geom_point() + 
+        geom_point(data = CreateVertices(example_data, "prob1", "prob2", "prob3"), 
+                   aes(x, y) , color = "red", pch = 17, size = 5)
+        
+```
+
 
 ![](README-example lines points texts-1.png)
 
