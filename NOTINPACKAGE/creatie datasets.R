@@ -77,3 +77,10 @@ errorNA<-Prob2Coord(errorset, "var1", "var2", "varNA") # error missing value whe
 vert_correct<-CreateVertices(errorset, "var1", "var2", "var3")
 
 
+
+sum(mean(example_data$var1),mean(example_data$var4),mean(example_data$var5) )
+qplot(data = heisertransform::CreateVertices(example_data, "prob1", "prob2", "prob3"),
+      x=x, y=y) +geom_point(data = Prob2Coord(example_data, "prob1", "prob2", "prob3"),
+                            aes(x, y))
+qplot(data = Prob2Coord(example_data, "prob1", "prob2", "prob3"),
+      x=x, y=y)
