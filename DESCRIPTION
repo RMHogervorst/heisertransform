@@ -3,17 +3,29 @@ Type: Package
 Title: Transforms 3 Categorical Probabilities Into X,Y Coordinates
 Version: 0.1.9000
 Date: 2016-01-02
-Authors@R: c( person("Roel", "Hogervorst", email = "hogervorst.rm@gmail.com", role = c("aut", "cre")),person("Vincent", "Buurman", email = "vjcbuurman@VUL AAN", role = c("aut")))
-Description: Based on Heiser 2004, this package transforms 3 categories of f.i.
-    multinomial regression into points in a 2d space. Probabilities of every row are
-    than transformed into xy coordinates so that points are arranged in proportion
-    to probability. When plotted the points are in a triangle that represents the
-    3 categories and the distance towards the points of the triangle represent
-    probability of belonging to this cluster.See also: Geometric representation of
-    association between categories, 2004 , Psychometrika VOL. 69, NO. 4, 513-545.
+Authors@R: c( person("Roel", "Hogervorst", email = "hogervorst.rm@gmail.com", role = c("aut", "cre")),person("Vincent", "Buurman", role = c("aut")), person("Willem", "Heiser", role=c("exp", "inv")))
+Description: An implementation of heiser (2004) that helps to visually display
+        relative probabilities to categorical assignment. Vertices,
+        representing the relative frequency of the categories, form the corners
+        of a triangle. Individual points in the triangle have a relative
+        position based on strength of association towards the vertices
+        (category). Thus points closer to a vertice have a larger probability
+        towards that category. This triangle approach is distinct from other
+        triangle plots known as terniary plots, trilinear diagrams or
+        triplots where every side of the triangle displays a dimension,
+        effectively creating a triangular coordinate system.
+        In our approach the relative probabilities are transformed to an
+        euclidian 2-dimensional space, making direct distance comparisons
+        possible. This package creates the vertices and coordinates for three
+        categorical probabilities that can be plotted with the plotting system
+        of your choice. For background information, the method and higher
+        dimensional generalizations: Geometric representation of association
+        between categories, 2004 , Psychometrika VOL. 69, NO. 4, 513-545.
+URL: https://github.com/RMHogervorst/heisertransform
+BugReports: https://github.com/RMHogervorst/heisertransform/issues
 Depends:
-    R (>= 3.0.1)
-License: file LICENSE
+    R (>= 3.0.1),
+License: MIT + file LICENSE
 LazyData: TRUE
 Suggests:
     knitr,
