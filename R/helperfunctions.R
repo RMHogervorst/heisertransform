@@ -1,4 +1,4 @@
-### Helperfunctions
+### Helperfuncties
 ## create vertices
 vertices_create<-function(C1,C2,C3){
 #V1
@@ -21,10 +21,4 @@ vertices
 check_and_fix_num<-function(variablename){
         if(!class(variablename)== "numeric"){variablename<-as.numeric(variablename)}
         return(variablename)
-}
-inputchecks<-function(df, var_left, var_top, var_right) {
-        if(!is.data.frame(df)){stop("first argument (df) should be of type data.frame")}
-        if(!is.vector(df[, var_left])){stop("var_left should be a vector")}
-        if(!is.vector(df[, var_top])){stop("var_top should be a vector")}
-        if(!is.vector(df[, var_right])){stop("var_right should be a vector")}
 }

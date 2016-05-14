@@ -17,16 +17,8 @@
 #'  The Prob2Coord function transforms every row into x and y coordinates.
 #'  It uses the CreateVertices function to create the vertices and these vertices
 #'  are then used to transform the x and y coordinates.
-#' @family Heiser transform functions
+#'
 #' @docType package
 #' @name heisertransform
 NULL
-
-#' testdata.
-#'
-#' Full baby name data provided by the SSA. This includes all names with at
-#' least 5 uses.
-#'
-#' @format  A data frame with 11 observations on the following 4 variables. \code{test1}, \code{test2},
-#'   \code{test3}, \code{cat}
-"testdata"
+#> NULL

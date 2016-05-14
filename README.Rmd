@@ -13,7 +13,6 @@ knitr::opts_chunk$set(
   fig.path = "README-"
 )
 ```
-
 last change `r Sys.Date()`
 
 Buildstatus: [![Build Status](https://travis-ci.org/RMHogervorst/heisertransform.svg?branch=develop)](https://travis-ci.org/RMHogervorst/heisertransform)

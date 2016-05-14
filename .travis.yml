@@ -8,3 +8,6 @@ os:
 after_script:
  - ./travis-tool.sh dump_logs_by_extension "timings"
  - ./travis-tool.sh dump_sysinfo
+ 
+after_success:
+bash <(curl -s https://codecov.io/bash)

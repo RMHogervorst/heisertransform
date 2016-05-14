@@ -4,7 +4,7 @@
 \alias{CreateVertices}
 \title{CreateVertices Transforms categorical probabilities into vertices with x.y coordinates.}
 \usage{
-CreateVertices(df, var_left, var_top, var_right, verticeName = TRUE)
+CreateVertices(df, var_left, var_top, var_right, verticeName = T)
 }
 \arguments{
 \item{df}{The data frame where variables can be found.}
@@ -23,12 +23,9 @@ that represent the vertices.
 Plot the vertices and use Prob2coord() to create the xy coordinates for all the rows.
 }
 \examples{
-\dontrun{
-CreateVertices(testdata, "test1", "test2","test3",verticeName = F)
-}
+\dontrun {CreateVertices(testdata, "test1", "test2","test3",verticeName = F)}
 }
 \seealso{
-Other Heiser.transform.functions: \code{\link{Prob2Coord}},
-  \code{\link{heisertransform}}
+Other Heiser.transform.functions: \code{\link{Prob2Coord}}
 }
 
