@@ -2,6 +2,8 @@
 last change 2016-05-14
 
 Buildstatus: [![Build Status](https://travis-ci.org/RMHogervorst/heisertransform.svg?branch=develop)](https://travis-ci.org/RMHogervorst/heisertransform)
+[![codecov](https://codecov.io/gh/RMHogervorst/heisertransform/branch/master/graph/badge.svg)](https://codecov.io/gh/RMHogervorst/heisertransform)
+
 
 [![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
 
